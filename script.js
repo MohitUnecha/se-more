@@ -357,15 +357,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── Contact Form ──────────────────────────
+  // ── Contact Form — mailto ──────────────────
   const contactForm = document.getElementById('contactForm');
   const formSuccess = document.getElementById('formSuccess');
 
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const company = document.getElementById('company').value;
+    const message = document.getElementById('message').value;
+
+    const subject = encodeURIComponent(`New Inquiry from ${name} — ${company || 'N/A'}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\nCompany: ${company || 'N/A'}\n\nMessage:\n${message}`
+    );
+
+    window.open(`mailto:se3morellc@gmail.com?subject=${subject}&body=${body}`, '_self');
+
     const btn = contactForm.querySelector('button[type="submit"]');
-    btn.innerHTML = '<span>Sending...</span>';
+    btn.innerHTML = '<span>Opening email...</span>';
     btn.disabled = true;
 
     setTimeout(() => {
@@ -373,7 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.style.display = 'none';
       formSuccess.classList.add('visible');
       contactForm.reset();
-    }, 1200);
+    }, 1500);
   });
 
   // ── Parallax Floating Shapes ──────────────
@@ -412,6 +424,145 @@ document.addEventListener('DOMContentLoaded', () => {
         link.style.color = 'var(--brg-glow)';
       }
     });
+  });
+
+  // ── Groq AI Chat Widget ───────────────────
+  const GROQ_KEY = (typeof SEMORE_CONFIG !== 'undefined' && SEMORE_CONFIG.GROQ_API_KEY) || '';
+  const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
+
+  const SYSTEM_PROMPT = `You are the SE:MORE AI assistant on the SE:MORE website. You answer questions about the company, its services, founders, and how it can help businesses.
+
+ABOUT SE:MORE:
+SE:MORE is a technology-enablement company that helps businesses see more ways to grow, profit, and operate smarter through technology. The name "SE:MORE" uses the colon as two eyes, representing vision, clarity, and insight. The company is based in New York, USA and works remotely worldwide. Email: se3morellc@gmail.com
+
+FOUNDERS:
+- Hitayu Parikh — Co-Founder (LinkedIn: linkedin.com/in/hitayu-parikh/)
+- Mohit Unecha — Co-Founder (LinkedIn: linkedin.com/in/mohitunecha/)
+
+WHAT SE:MORE DOES:
+1. Automate manual workflows — eliminate repetitive tasks, save hours weekly
+2. Integrate AI into existing systems — no rip-and-replace needed
+3. Modernize outdated tools — bridge legacy and new systems seamlessly
+4. Build profitable tech solutions — reduce costs, increase revenue from day one
+
+WHY SE:MORE IS DIFFERENT:
+- Insight-driven: data-backed solutions, not guesswork
+- Uses what the business already has: no expensive replacements
+- Fast implementation: delivers in weeks, not months
+- Measurable results: clear KPIs on every engagement
+
+PROCESS:
+Step 1: "We See" — Discovery & clarity, audit workflows, tools, data
+Step 2: "We Simplify" — Strategy & solution design, clear actionable roadmaps
+Step 3: "You Scale" — Implementation & optimization, measurable results
+
+RESULTS:
+- Saved clients 20+ hours/week through automation
+- Reduced customer support load by 35% via AI integration
+- Streamlined operations without replacing legacy systems
+
+BRAND VALUES: Vision, Simplicity, Insight, Human-Centric Technology
+
+INSTRUCTIONS:
+- Be friendly, concise, and helpful
+- Keep responses to 2-3 sentences unless more detail is asked for
+- If asked about pricing, say to book a free consultation for custom quotes
+- If asked about things unrelated to SE:MORE, politely redirect
+- Encourage visitors to book a consultation or email se3morellc@gmail.com`;
+
+  const chatWidget = document.getElementById('chatWidget');
+  const chatToggle = document.getElementById('chatToggle');
+  const chatWindow = document.getElementById('chatWindow');
+  const chatMessages = document.getElementById('chatMessages');
+  const chatFormEl = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+
+  let chatHistory = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'assistant', content: "Hey! I'm the SE:MORE AI assistant. Ask me anything about our services, how we work, our founders, or how we can help your business. What would you like to know?" }
+  ];
+
+  chatToggle.addEventListener('click', () => {
+    chatWidget.classList.toggle('open');
+    if (chatWidget.classList.contains('open')) {
+      chatInput.focus();
+    }
+  });
+
+  function addMessage(text, sender) {
+    const div = document.createElement('div');
+    div.className = `chat-msg ${sender}`;
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble';
+    bubble.textContent = text;
+    div.appendChild(bubble);
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return div;
+  }
+
+  function addTypingIndicator() {
+    const div = document.createElement('div');
+    div.className = 'chat-msg bot';
+    div.id = 'typingIndicator';
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble typing';
+    bubble.innerHTML = '<span></span><span></span><span></span>';
+    div.appendChild(bubble);
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function removeTypingIndicator() {
+    const indicator = document.getElementById('typingIndicator');
+    if (indicator) indicator.remove();
+  }
+
+  async function sendToGroq(userMessage) {
+    chatHistory.push({ role: 'user', content: userMessage });
+
+    addTypingIndicator();
+
+    try {
+      const response = await fetch(GROQ_URL, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${GROQ_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: 'llama-3.3-70b-versatile',
+          messages: chatHistory,
+          max_tokens: 300,
+          temperature: 0.7
+        })
+      });
+
+      removeTypingIndicator();
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const reply = data.choices[0].message.content;
+
+      chatHistory.push({ role: 'assistant', content: reply });
+      addMessage(reply, 'bot');
+    } catch (err) {
+      removeTypingIndicator();
+      addMessage("Sorry, I'm having trouble connecting right now. Please email us at se3morellc@gmail.com!", 'bot');
+    }
+  }
+
+  chatFormEl.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const msg = chatInput.value.trim();
+    if (!msg) return;
+
+    addMessage(msg, 'user');
+    chatInput.value = '';
+    sendToGroq(msg);
   });
 
 });
