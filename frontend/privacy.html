@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — SE:MORE</title>
+  <meta name="description" content="Privacy Policy for SE:MORE LLC. Learn how we collect, use, and protect your personal information.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Policy Page Styles ───────────────────────────────────────── */
+    .policy-page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 140px 0 80px;
+    }
+
+    /* Hero */
+    .policy-hero {
+      text-align: center;
+      padding: 160px 0 80px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .policy-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0, 232, 138, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .policy-hero .section-tag {
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .policy-hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin: 0 0 16px;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .policy-hero-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+      margin: 0;
+    }
+
+    /* Body */
+    .policy-body {
+      padding: 80px 0 100px;
+    }
+
+    .policy-content {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .policy-content h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--brg-glow);
+      margin: 52px 0 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .policy-content h2:first-child {
+      margin-top: 0;
+    }
+
+    .policy-content p {
+      color: var(--text-secondary);
+      line-height: 1.85;
+      margin: 0 0 16px;
+      font-size: 0.97rem;
+    }
+
+    .policy-content ul {
+      color: var(--text-secondary);
+      line-height: 1.85;
+      margin: 0 0 16px;
+      padding-left: 1.5em;
+      font-size: 0.97rem;
+    }
+
+    .policy-content ul li {
+      margin-bottom: 8px;
+    }
+
+    .policy-content strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .policy-content a {
+      color: var(--gulf-blue);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .policy-content a:hover {
+      color: var(--brg-glow);
+      text-decoration: underline;
+    }
+
+    .policy-divider {
+      height: 1px;
+      background: var(--border-color);
+      margin: 48px 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .policy-hero  { padding: 140px 0 60px; }
+      .policy-body  { padding: 60px 0 80px; }
+      .policy-content h2 { margin-top: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Hidden stubs required by script.js -->
+  <div id="pageLoader" style="display:none"></div>
+  <div id="eyeZoomOverlay" style="display:none"></div>
+
+  <!-- Hidden contact form stub (keeps script.js selectors from erroring) -->
+  <form id="contactForm" style="display:none" aria-hidden="true">
+    <input type="text"   id="name"    name="name">
+    <input type="email"  id="email"   name="email">
+    <input type="text"   id="company" name="company">
+    <textarea            id="message" name="message"></textarea>
+    <div id="formSuccess"></div>
+  </form>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-se">SE</span><span class="logo-colon"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></span><span class="logo-more">MORE</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#about">About</a></li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#services">Services <span class="nav-caret">▾</span></a>
+          <div class="nav-dropdown">
+            <a href="services/automation.html"><span class="nav-dropdown-icon">⚙️</span>Automation</a>
+            <a href="services/ai-integration.html"><span class="nav-dropdown-icon">🤖</span>AI Integration</a>
+            <a href="services/modernization.html"><span class="nav-dropdown-icon">🔧</span>Modernization</a>
+            <a href="services/consulting.html"><span class="nav-dropdown-icon">📊</span>Consulting</a>
+          </div>
+        </li>
+        <li><a href="index.html#why-us">Why Us</a></li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="index.html#contact" class="btn btn-primary btn-nav">Book a Consultation</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Policy Hero -->
+  <section class="policy-hero">
+    <div class="container">
+      <span class="section-tag">Legal</span>
+      <h1>Privacy Policy</h1>
+      <p class="policy-hero-subtitle">Last updated March 15, 2026</p>
+    </div>
+  </section>
+
+  <!-- Policy Body -->
+  <section class="policy-body">
+    <div class="container">
+      <div class="policy-content">
+
+        <h2>1. Information We Collect</h2>
+        <p>SE:MORE LLC ("SE:MORE," "we," "us," or "our") collects information you voluntarily provide to us and information collected automatically when you use our website. The types of information we may collect include:</p>
+        <ul>
+          <li><strong>Contact form data:</strong> When you submit an inquiry through our website contact form, we collect your full name, email address, company name, and the content of your message.</li>
+          <li><strong>Analytics data:</strong> We automatically collect certain technical and behavioral information when you visit our site, including browser type, operating system, referring URLs, pages visited, time on page, and general geographic region based on IP address.</li>
+          <li><strong>Cookies and tracking data:</strong> Our website uses cookies and similar technologies to understand traffic patterns and improve site performance. See Section 4 for full details.</li>
+        </ul>
+        <p>We do not collect sensitive personal data such as financial account numbers, government-issued identification, or health information through this website.</p>
+
+        <div class="policy-divider"></div>
+
+        <h2>2. How We Use Your Information</h2>
+        <p>We use the information we collect for the following purposes:</p>
+        <ul>
+          <li><strong>To respond to inquiries:</strong> When you submit our contact form, we use your name, email address, and message content to follow up on your request and provide information about our services.</li>
+          <li><strong>To improve our services and website:</strong> Aggregate analytics data helps us understand how visitors engage with our content so we can continuously improve the user experience and the relevance of our offerings.</li>
+          <li><strong>To send relevant updates:</strong> With your explicit consent, we may send periodic communications about SE:MORE services, case studies, or industry insights. You may withdraw consent and opt out at any time by contacting us at <a href="mailto:se3morellc@gmail.com">se3morellc@gmail.com</a>.</li>
+          <li><strong>To meet legal obligations:</strong> We may process and retain your information as required by applicable laws and regulations.</li>
+        </ul>
+        <p>We will not use your personal information for purposes materially different from those described here without providing you prior notice and, where required by law, obtaining your consent.</p>
+
+        <div class="policy-divider"></div>
+
+        <h2>3. Information Sharing</h2>
+        <p>SE:MORE does not sell, rent, or trade your personal information to any third party. We may share information only in the following limited circumstances:</p>
+        <ul>
+          <li><strong>Service providers:</strong> We may share your information with trusted third-party vendors who help us operate our website and deliver our services — for example, email delivery platforms used to send you a response to your inquiry. These providers are bound by contractual obligations to keep your data confidential and may only use it to perform services on our behalf.</li>
+          <li><strong>Legal requirements:</strong> We may disclose your information if required by law, subpoena, court order, or governmental regulation, or if we reasonably believe such disclosure is necessary to protect the rights, property, or safety of SE:MORE, our clients, or the public.</li>
+          <li><strong>Business transfers:</strong> In the event of a merger, acquisition, restructuring, or sale of all or substantially all of our assets, your personal information may be transferred as part of that transaction. We will notify you of any such change by posting a prominent notice on our website prior to the transfer taking effect.</li>
+        </ul>
+
+        <div class="policy-divider"></div>
+
+        <h2>4. Cookies and Tracking</h2>
+        <p>Our website uses cookies — small text files stored in your browser — and similar tracking technologies to support site functionality and gather anonymized usage data. We currently use the following categories of cookies:</p>
+        <ul>
+          <li><strong>Essential cookies:</strong> Required for the website to function correctly, such as preserving your theme preference (light or dark mode) across visits.</li>
+          <li><strong>Analytics cookies:</strong> Used to collect aggregate, anonymized data on page views, traffic sources, and navigation flow. This data is never used to personally identify individual visitors.</li>
+        </ul>
+        <p>You can manage, restrict, or delete cookies at any time through your browser settings. Most browsers provide options to block all cookies or to be notified before a cookie is set. Please be aware that disabling cookies may affect certain features or functionality of the website.</p>
+        <p>For instructions on managing cookies, please refer to your browser's help documentation (e.g., Chrome, Firefox, Safari, Edge).</p>
+
+        <div class="policy-divider"></div>
+
+        <h2>5. Data Security</h2>
+        <p>SE:MORE implements commercially reasonable technical and organizational safeguards to protect your personal information from unauthorized access, disclosure, alteration, or destruction. These include industry-standard encryption for data transmitted over the internet (HTTPS/TLS) and restricted access to information on a need-to-know basis.</p>
+        <p>However, no method of transmission over the internet or electronic storage system is completely secure. While we strive to protect your information, we cannot guarantee absolute security. If you believe your data has been compromised or that there has been unauthorized access to your information, please notify us immediately at <a href="mailto:se3morellc@gmail.com">se3morellc@gmail.com</a>.</p>
+
+        <div class="policy-divider"></div>
+
+        <h2>6. Your Rights</h2>
+        <p>Depending on your jurisdiction, you may have the following rights with respect to your personal information held by SE:MORE:</p>
+        <ul>
+          <li><strong>Right of access:</strong> You may request a copy of the personal information we hold about you.</li>
+          <li><strong>Right to correction:</strong> You may request that we update or correct inaccurate or incomplete information we have on file.</li>
+          <li><strong>Right to deletion:</strong> You may request that we delete your personal information. We will honor such requests except where we are required by law to retain the data or where deletion would impair our ability to fulfill legal obligations.</li>
+          <li><strong>Right to opt out:</strong> You may opt out of non-essential communications from SE:MORE at any time.</li>
+        </ul>
+        <p>To exercise any of these rights, please send your request to <a href="mailto:se3morellc@gmail.com">se3morellc@gmail.com</a>. We will respond within a reasonable timeframe and in accordance with applicable law.</p>
+
+        <div class="policy-divider"></div>
+
+        <h2>7. Third-Party Links</h2>
+        <p>Our website contains links to third-party websites and platforms, including but not limited to LinkedIn and Google Maps. These links are provided solely for your convenience and informational purposes.</p>
+        <p>SE:MORE has no control over the content, privacy practices, or data handling policies of third-party sites. Once you navigate away from our website, this Privacy Policy no longer applies. The privacy policies of those respective third parties govern any data they may collect. We encourage you to review the privacy policies of any external site you visit before providing personal information.</p>
+
+        <div class="policy-divider"></div>
+
+        <h2>8. Children's Privacy</h2>
+        <p>SE:MORE's website and services are not directed to, and we do not knowingly collect personal information from, individuals under the age of 13. If you are a parent or legal guardian and believe that your child has provided personal information to us without your consent, please contact us at <a href="mailto:se3morellc@gmail.com">se3morellc@gmail.com</a>. Upon verification, we will take prompt steps to delete such information from our records.</p>
+
+        <div class="policy-divider"></div>
+
+        <h2>9. Changes to This Policy</h2>
+        <p>SE:MORE reserves the right to update or modify this Privacy Policy at any time to reflect changes in our data practices, legal requirements, or the services we provide. When we make material changes, we will update the "Last updated" date displayed at the top of this page.</p>
+        <p>We encourage you to review this page periodically to stay informed about how we handle your information. Your continued use of our website after any changes are posted constitutes your acknowledgment and acceptance of the updated policy.</p>
+
+        <div class="policy-divider"></div>
+
+        <h2>10. Contact Us</h2>
+        <p>If you have any questions, concerns, or requests related to this Privacy Policy or the way SE:MORE handles your personal data, please reach out to us:</p>
+        <p>
+          <strong>SE:MORE LLC</strong><br>
+          Central New Jersey, USA<br>
+          Email: <a href="mailto:se3morellc@gmail.com">se3morellc@gmail.com</a>
+        </p>
+        <p>We are committed to addressing your privacy concerns promptly, honestly, and transparently.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <span class="logo-se">SE</span><span class="logo-colon"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></span><span class="logo-more">MORE</span>
+          </a>
+          <p>Helping businesses see more possibilities through smart technology.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="index.html#about">About</a>
+            <a href="index.html#services">Services</a>
+            <a href="index.html#how-it-works">Process</a>
+            <a href="index.html#contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="index.html#services">Automation</a>
+            <a href="index.html#services">AI Integration</a>
+            <a href="index.html#services">Modernization</a>
+            <a href="index.html#services">Consulting</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SE:MORE. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AI Chat Widget -->
+  <div class="chat-widget" id="chatWidget">
+    <button class="chat-toggle" id="chatToggle" aria-label="Chat with SE:MORE AI">
+      <span class="chat-icon-open chat-toggle-eyes">
+        <span class="toggle-eye"></span>
+        <span class="toggle-eye"></span>
+      </span>
+      <svg class="chat-icon-close" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span class="chat-badge">AI</span>
+    </button>
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <span class="chat-avatar">
+            <span class="mini-eye"></span>
+            <span class="mini-eye"></span>
+          </span>
+          <div>
+            <span class="chat-header-title">SE:MORE AI</span>
+            <span class="chat-header-status"><span class="status-dot"></span>Online, ask anything</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg bot">
+          <div class="chat-bubble">Hey! I'm the SE:MORE AI assistant. Ask me anything about our services, how we work, or how we can help your business.</div>
+        </div>
+        <div class="chat-quick-replies" id="chatQuickReplies">
+          <button class="quick-reply" data-msg="What services do you offer?">Your services</button>
+          <button class="quick-reply" data-msg="How does your process work?">How it works</button>
+          <button class="quick-reply" data-msg="Who are the founders?">Meet the team</button>
+          <button class="quick-reply" data-msg="How can you help my business?">Help my business</button>
+        </div>
+      </div>
+      <form class="chat-input-wrap" id="chatForm">
+        <input type="text" id="chatInput" placeholder="Ask about SE:MORE..." autocomplete="off">
+        <button type="submit" aria-label="Send">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

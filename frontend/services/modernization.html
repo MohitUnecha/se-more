@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Modernization | SE:MORE</title>
+  <meta name="description" content="SE:MORE modernizes legacy systems without disruption. Upgrade outdated databases, desktop apps, and on-premise infrastructure with zero downtime and no big-bang replacements.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Hidden stubs required by script.js -->
+  <div class="page-loader" id="pageLoader" style="display:none"></div>
+  <div class="eye-zoom-overlay" id="eyeZoomOverlay" style="display:none"></div>
+  <div style="display:none">
+    <form id="contactForm">
+      <input id="name"><input id="email"><input id="company"><textarea id="message"></textarea>
+      <button type="submit"></button>
+      <div id="formSuccess"></div>
+    </form>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="logo-se">SE</span><span class="logo-colon"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></span><span class="logo-more">MORE</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html#about">About</a></li>
+        <li class="nav-item-dropdown">
+          <a href="../index.html#services">Services <span class="nav-caret">▾</span></a>
+          <div class="nav-dropdown">
+            <a href="automation.html"><span class="nav-dropdown-icon">⚙️</span>Automation</a>
+            <a href="ai-integration.html"><span class="nav-dropdown-icon">🤖</span>AI Integration</a>
+            <a href="modernization.html"><span class="nav-dropdown-icon">🔧</span>Modernization</a>
+            <a href="consulting.html"><span class="nav-dropdown-icon">📊</span>Consulting</a>
+          </div>
+        </li>
+        <li><a href="../index.html#why-us">Why Us</a></li>
+        <li><a href="../index.html#how-it-works">How It Works</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="../index.html#contact" class="btn btn-primary btn-nav">Book a Consultation</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Service Hero -->
+  <section class="service-page-hero">
+    <div class="hero-bg">
+      <div class="grid-lines"></div>
+      <div class="floating-shape shape-1"></div>
+      <div class="floating-shape shape-2"></div>
+      <div class="floating-shape shape-3"></div>
+      <div class="scan-line"></div>
+      <div class="scan-line scan-line-2"></div>
+    </div>
+    <div class="container">
+      <div class="service-page-badge">🔧 SYSTEM MODERNIZATION</div>
+      <h1>Modern Systems <span class="gradient-text">Without the Risk</span></h1>
+      <p class="hero-sub">Upgrade your legacy tech stack without tearing everything down. We modernize what you have, preserve institutional knowledge, and keep operations running smoothly throughout every step of the transition.</p>
+      <div class="hero-actions">
+        <a href="../index.html#contact" class="btn btn-primary btn-lg btn-glow">
+          <span>Modernize My Stack</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#approach" class="btn btn-ghost btn-lg">
+          <span>See the Approach</span>
+        </a>
+      </div>
+      <div class="service-stat-row">
+        <div class="service-stat-item">
+          <div class="stat-num">0</div>
+          <div class="stat-label">legacy systems fully ripped out, all streamlined in place</div>
+        </div>
+        <div class="service-stat-item">
+          <div class="stat-num">4–8 wks</div>
+          <div class="stat-label">typical modernization sprint</div>
+        </div>
+        <div class="service-stat-item">
+          <div class="stat-num">Zero downtime</div>
+          <div class="stat-label">migration guarantee</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section class="service-use-cases" id="use-cases">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Use Cases</span>
+        <h2 class="section-title">What We <span class="gradient-text">Modernize</span></h2>
+        <p class="section-sub">From decade-old databases to paper-based processes, we've seen it all, and modernized every bit of it without a single moment of downtime.</p>
+      </div>
+      <div class="use-case-grid">
+        <div class="use-case-card" data-aos>
+          <div class="use-case-icon">🗄️</div>
+          <h4>Legacy Databases</h4>
+          <p>Migrate from outdated SQL servers to modern cloud-native databases with full data integrity and zero disruption to your day-to-day operations.</p>
+        </div>
+        <div class="use-case-card" data-aos>
+          <div class="use-case-icon">💻</div>
+          <h4>Desktop Apps</h4>
+          <p>Transform standalone desktop applications into web-based, accessible tools that work from any device, anywhere, no local installs required.</p>
+        </div>
+        <div class="use-case-card" data-aos>
+          <div class="use-case-icon">📋</div>
+          <h4>Spreadsheet Operations</h4>
+          <p>Convert error-prone manual spreadsheets into automated, real-time dashboards that give your team instant visibility, accuracy, and peace of mind.</p>
+        </div>
+        <div class="use-case-card" data-aos>
+          <div class="use-case-icon">☁️</div>
+          <h4>On-Premise to Cloud</h4>
+          <p>Lift-and-shift or fully re-architect workloads to AWS, GCP, or Azure, we design the migration path that fits your risk tolerance and budget.</p>
+        </div>
+        <div class="use-case-card" data-aos>
+          <div class="use-case-icon">🔌</div>
+          <h4>API-Enable Old Systems</h4>
+          <p>Add modern REST or GraphQL APIs to systems that never had them, unlocking integrations with the tools your team relies on every day.</p>
+        </div>
+        <div class="use-case-card" data-aos>
+          <div class="use-case-icon">🧹</div>
+          <h4>Tech Debt Reduction</h4>
+          <p>Refactor and clean up years of accumulated code entropy, improving performance, maintainability, and developer velocity without a full rewrite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Approach Section -->
+  <section class="service-process" id="approach">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Our Process</span>
+        <h2 class="section-title">Our <span class="gradient-text">Zero-Disruption</span> Approach</h2>
+        <p class="section-sub">Four deliberate steps that let old and new systems coexist until you are fully confident in every corner of the upgrade.</p>
+      </div>
+      <div class="process-steps-h">
+        <div class="process-step-h" data-aos>
+          <div class="process-step-num">🔍</div>
+          <h4>Assess</h4>
+          <p>Full audit of your current stack, tech debt, and modernization opportunities. We map every dependency before we touch a single line of code.</p>
+        </div>
+        <div class="process-step-h" data-aos>
+          <div class="process-step-num">🌉</div>
+          <h4>Bridge</h4>
+          <p>We build connectors that let old and new systems run in parallel during the transition. Your team never loses access to critical functionality.</p>
+        </div>
+        <div class="process-step-h" data-aos>
+          <div class="process-step-num">🚀</div>
+          <h4>Migrate</h4>
+          <p>Module-by-module migration with validation at every step, zero big-bang risk. Each component is tested and verified before we move to the next.</p>
+        </div>
+        <div class="process-step-h" data-aos>
+          <div class="process-step-num">✅</div>
+          <h4>Retire</h4>
+          <p>Once the new system is stable and your team is confident, legacy components are safely retired, leaving you with a clean, modern stack.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technologies Section -->
+  <section class="service-tools">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Tech Stack</span>
+        <h2 class="section-title">Technologies We <span class="gradient-text">Modernize With</span></h2>
+        <p class="section-sub">We are platform-agnostic and choose the right tool for your context, not the trendiest one on the market.</p>
+      </div>
+      <div class="tools-grid">
+        <span class="tool-chip">AWS</span>
+        <span class="tool-chip">Google Cloud</span>
+        <span class="tool-chip">Azure</span>
+        <span class="tool-chip">PostgreSQL</span>
+        <span class="tool-chip">MongoDB</span>
+        <span class="tool-chip">Docker</span>
+        <span class="tool-chip">Kubernetes</span>
+        <span class="tool-chip">React</span>
+        <span class="tool-chip">Node.js</span>
+        <span class="tool-chip">FastAPI</span>
+        <span class="tool-chip">GraphQL</span>
+        <span class="tool-chip">REST APIs</span>
+        <span class="tool-chip">Terraform</span>
+        <span class="tool-chip">CI/CD</span>
+        <span class="tool-chip">GitHub Actions</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="service-page-cta">
+    <div class="container">
+      <h2>Ready to Leave <span class="gradient-text">Legacy Behind?</span></h2>
+      <p>Book a free technical audit and we will map out a zero-disruption modernization path tailored to your stack and timeline.</p>
+      <a href="../index.html#contact" class="btn btn-primary btn-lg btn-glow">
+        <span>Book Free Audit</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <br><br>
+      <a href="../index.html#services" class="back-link">&#8592; Back to all services</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">
+            <span class="logo-se">SE</span><span class="logo-colon"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></span><span class="logo-more">MORE</span>
+          </a>
+          <p>Helping businesses see more possibilities through smart technology.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#how-it-works">Process</a>
+            <a href="../index.html#contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="automation.html">Automation</a>
+            <a href="ai-integration.html">AI Integration</a>
+            <a href="modernization.html">Modernization</a>
+            <a href="consulting.html">Consulting</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SE:MORE. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../privacy.html">Privacy Policy</a>
+          <a href="../terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AI Chat Widget -->
+  <div class="chat-widget" id="chatWidget">
+    <button class="chat-toggle" id="chatToggle" aria-label="Chat with SE:MORE AI">
+      <span class="chat-icon-open chat-toggle-eyes">
+        <span class="toggle-eye"></span>
+        <span class="toggle-eye"></span>
+      </span>
+      <svg class="chat-icon-close" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span class="chat-badge">AI</span>
+    </button>
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <span class="chat-avatar">
+            <span class="mini-eye"></span>
+            <span class="mini-eye"></span>
+          </span>
+          <div>
+            <span class="chat-header-title">SE:MORE AI</span>
+            <span class="chat-header-status"><span class="status-dot"></span>Online, ask anything</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg bot">
+          <div class="chat-bubble">Hey! I'm the SE:MORE AI assistant. Ask me anything about our modernization services, our process, or how we can help your business upgrade without disruption.</div>
+        </div>
+        <div class="chat-quick-replies" id="chatQuickReplies">
+          <button class="quick-reply" data-msg="What systems can you modernize?">What you modernize</button>
+          <button class="quick-reply" data-msg="How does your modernization process work?">The process</button>
+          <button class="quick-reply" data-msg="How long does modernization take?">Timeline</button>
+          <button class="quick-reply" data-msg="How can you help my business?">Help my business</button>
+        </div>
+      </div>
+      <form class="chat-input-wrap" id="chatForm">
+        <input type="text" id="chatInput" placeholder="Ask about modernization..." autocomplete="off">
+        <button type="submit" aria-label="Send">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script src="../config.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

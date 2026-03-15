@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service | SE:MORE</title>
+  <meta name="description" content="Terms of Service for SE:MORE LLC. Read our terms governing the use of our website and services.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Hidden stubs required by script.js (prevents JS errors) -->
+  <div id="pageLoader" style="display:none"></div>
+  <div id="eyeZoomOverlay" style="display:none"></div>
+  <div style="display:none" aria-hidden="true">
+    <form id="contactForm">
+      <input id="name"><input id="email"><input id="company"><textarea id="message"></textarea>
+      <button type="submit"></button><div id="formSuccess"></div>
+    </form>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-se">SE</span><span class="logo-colon"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></span><span class="logo-more">MORE</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#about">About</a></li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#services">Services <span class="nav-caret">▾</span></a>
+          <div class="nav-dropdown">
+            <a href="services/automation.html"><span class="nav-dropdown-icon">⚙️</span>Automation</a>
+            <a href="services/ai-integration.html"><span class="nav-dropdown-icon">🤖</span>AI Integration</a>
+            <a href="services/modernization.html"><span class="nav-dropdown-icon">🔧</span>Modernization</a>
+            <a href="services/consulting.html"><span class="nav-dropdown-icon">📊</span>Consulting</a>
+          </div>
+        </li>
+        <li><a href="index.html#why-us">Why Us</a></li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="index.html#contact" class="btn btn-primary btn-nav">Book a Consultation</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Policy Hero -->
+  <section class="policy-hero">
+    <div class="hero-bg">
+      <div class="grid-lines"></div>
+      <div class="floating-shape shape-1"></div>
+      <div class="floating-shape shape-2"></div>
+      <div class="floating-shape shape-3"></div>
+      <div class="scan-line"></div>
+      <div class="scan-line scan-line-2"></div>
+    </div>
+    <div class="container">
+      <span class="section-tag">Legal</span>
+      <h1>Terms of Service</h1>
+      <p class="policy-subtitle">Last updated March 15, 2026</p>
+    </div>
+  </section>
+
+  <!-- Policy Body -->
+  <section class="policy-body">
+    <div class="container">
+      <div class="policy-content">
+
+        <p class="policy-intro">
+          Please read these Terms of Service carefully before using the SE:MORE website. By accessing or using our website, you agree to be bound by these terms. If you do not agree, please do not use the site.
+        </p>
+
+        <!-- 1. Acceptance of Terms -->
+        <h2><span class="policy-num">1</span> Acceptance of Terms</h2>
+        <p>
+          By accessing, browsing, or otherwise using the website located at <strong>semorellc.com</strong> (the "Site"), you acknowledge that you have read, understood, and agree to be bound by these Terms of Service (the "Terms") and all applicable laws and regulations. These Terms constitute a legally binding agreement between you and SE:MORE LLC ("SE:MORE," "we," "us," or "our").
+        </p>
+        <p>
+          If you are accessing the Site on behalf of a company or other legal entity, you represent that you have the authority to bind that entity to these Terms. If you do not have such authority, or if you do not agree with any of these Terms, you must not access or use the Site.
+        </p>
+
+        <!-- 2. Description of Services -->
+        <h2><span class="policy-num">2</span> Description of Services</h2>
+        <p>
+          SE:MORE LLC is a technology consulting firm based in Central New Jersey, USA. Through this Site, we provide information about our professional services, which include but are not limited to:
+        </p>
+        <ul>
+          <li>Workflow automation — eliminating manual, repetitive tasks through smart automation</li>
+          <li>AI integration — embedding artificial intelligence into existing business systems and processes</li>
+          <li>Legacy system modernization — upgrading outdated tools and infrastructure without disruptive replacements</li>
+          <li>Technology consulting — strategic advisory services to help businesses unlock operational and financial value through technology</li>
+        </ul>
+        <p>
+          The Site is informational in nature. Specific service engagements, deliverables, timelines, and fees are governed by separate written agreements entered into between SE:MORE and its clients.
+        </p>
+
+        <!-- 3. Use of Website -->
+        <h2><span class="policy-num">3</span> Use of Website</h2>
+        <p>
+          You may use the Site for lawful purposes only and in accordance with these Terms. Specifically, you agree that you will:
+        </p>
+        <ul>
+          <li>Use the Site only for personal, non-commercial information gathering, unless you have entered into a separate written agreement with SE:MORE</li>
+          <li>Not reproduce, distribute, modify, or commercially exploit any content from the Site without our prior written permission</li>
+          <li>Not use automated scripts, crawlers, scrapers, or bots to extract data or content from the Site in bulk</li>
+          <li>Not attempt to gain unauthorized access to any portion of the Site, its servers, or any connected systems</li>
+          <li>Not engage in any activity that damages, disables, overburdens, or impairs the Site or interferes with others' use of it</li>
+          <li>Not misrepresent your identity or affiliation, or impersonate SE:MORE, any of its employees, or any other person or entity</li>
+          <li>Not use the Site to transmit any unsolicited commercial communications, malware, or harmful code</li>
+          <li>Comply with all applicable local, state, national, and international laws and regulations</li>
+        </ul>
+        <p>
+          We reserve the right to terminate or restrict your access to the Site at any time, without notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties.
+        </p>
+
+        <!-- 4. Intellectual Property -->
+        <h2><span class="policy-num">4</span> Intellectual Property</h2>
+        <p>
+          The Site and all of its content — including but not limited to text, graphics, logos, icons, images, audio clips, data compilations, software, and the overall design and layout — are the exclusive property of SE:MORE LLC and are protected by applicable United States and international intellectual property laws.
+        </p>
+        <p>
+          The SE:MORE name, logo, the "SE:MORE" mark, and all related branding elements are trademarks or trade dress of SE:MORE LLC. Nothing on this Site grants any license or right to use any SE:MORE trademark, trade name, logo, or branding without our prior written consent.
+        </p>
+        <p>
+          You may view and print pages from the Site solely for your personal, non-commercial use, provided you do not remove or alter any copyright, trademark, or other proprietary notices. Any other use, reproduction, modification, distribution, or republication of Site content requires our express prior written permission.
+        </p>
+
+        <!-- 5. Client Engagements -->
+        <h2><span class="policy-num">5</span> Client Engagements</h2>
+        <p>
+          This Site is intended solely for informational and marketing purposes. Nothing on the Site constitutes an offer or a binding proposal to provide any professional services, and no client relationship is formed merely by visiting the Site or submitting a contact inquiry.
+        </p>
+        <p>
+          Any professional services provided by SE:MORE LLC are governed exclusively by the terms of a separate, duly executed written agreement (a "Service Agreement") between SE:MORE and the applicable client. In the event of any conflict between these Terms and a Service Agreement, the Service Agreement shall control with respect to the subject matter covered therein.
+        </p>
+        <p>
+          SE:MORE makes no representation that any service described on the Site is available to all persons in all locations. Services may be subject to eligibility requirements, availability, geographic restrictions, or other conditions.
+        </p>
+
+        <!-- 6. Disclaimer of Warranties -->
+        <h2><span class="policy-num">6</span> Disclaimer of Warranties</h2>
+        <p>
+          THE SITE AND ALL CONTENT AND MATERIALS CONTAINED THEREIN ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+        </p>
+        <p>
+          TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, SE:MORE LLC EXPRESSLY DISCLAIMS ALL WARRANTIES, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING BUT NOT LIMITED TO:
+        </p>
+        <ul>
+          <li>Any implied warranty of merchantability, fitness for a particular purpose, or non-infringement</li>
+          <li>Any warranty that the Site will be uninterrupted, error-free, secure, or free of viruses or other harmful components</li>
+          <li>Any warranty regarding the accuracy, completeness, timeliness, or reliability of any content or information on the Site</li>
+          <li>Any warranty that defects in the Site will be corrected</li>
+        </ul>
+        <p>
+          We do not warrant that the information on the Site is current, and we are under no obligation to update it. Use of any information obtained from or through the Site is at your own risk.
+        </p>
+
+        <!-- 7. Limitation of Liability -->
+        <h2><span class="policy-num">7</span> Limitation of Liability</h2>
+        <p>
+          TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL SE:MORE LLC, ITS OFFICERS, DIRECTORS, EMPLOYEES, MEMBERS, CONTRACTORS, OR AGENTS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, PUNITIVE, OR EXEMPLARY DAMAGES ARISING OUT OF OR RELATED TO:
+        </p>
+        <ul>
+          <li>Your use of, or inability to use, the Site</li>
+          <li>Any unauthorized access to or alteration of your transmissions or data</li>
+          <li>Any content or conduct of any third party on the Site</li>
+          <li>Any other matter relating to the Site</li>
+        </ul>
+        <p>
+          THESE EXCLUSIONS APPLY REGARDLESS OF WHETHER SUCH DAMAGES ARE BASED ON CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY, OR ANY OTHER LEGAL THEORY, EVEN IF SE:MORE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+        </p>
+        <p>
+          In jurisdictions where limitation of incidental or consequential damages is not permitted, our liability is limited to the maximum extent permitted by law. In all cases, SE:MORE's total aggregate liability to you for any claim arising out of or related to the Site or these Terms shall not exceed the total fees, if any, paid by you to SE:MORE in the twelve (12) months preceding the claim.
+        </p>
+
+        <!-- 8. Indemnification -->
+        <h2><span class="policy-num">8</span> Indemnification</h2>
+        <p>
+          You agree to defend, indemnify, and hold harmless SE:MORE LLC and its officers, directors, employees, members, contractors, licensors, and agents from and against any and all claims, damages, obligations, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising from or related to:
+        </p>
+        <ul>
+          <li>Your use of, or access to, the Site</li>
+          <li>Your violation of any provision of these Terms</li>
+          <li>Your violation of any third-party rights, including without limitation any intellectual property or privacy rights</li>
+          <li>Any content you submit, post, or transmit through the Site</li>
+          <li>Any misrepresentation you make in connection with your use of the Site</li>
+        </ul>
+        <p>
+          SE:MORE reserves the right to assume exclusive defense and control of any matter subject to indemnification by you, in which case you agree to cooperate with SE:MORE's defense of such claim.
+        </p>
+
+        <!-- 9. Privacy Policy -->
+        <h2><span class="policy-num">9</span> Privacy Policy</h2>
+        <p>
+          Your use of the Site is also governed by our <a href="privacy.html">Privacy Policy</a>, which is incorporated into these Terms by reference. By using the Site, you consent to the collection, use, and disclosure of your information as described in the Privacy Policy. Please review our Privacy Policy to understand our practices.
+        </p>
+
+        <!-- 10. Changes to Terms -->
+        <h2><span class="policy-num">10</span> Changes to Terms</h2>
+        <p>
+          SE:MORE LLC reserves the right to modify, amend, or replace these Terms at any time at our sole discretion. When we make material changes, we will update the "Last updated" date at the top of this page. We may also provide additional notice through the Site or by email where appropriate.
+        </p>
+        <p>
+          Your continued use of the Site after any changes to these Terms constitutes your acceptance of the revised Terms. If you do not agree to the updated Terms, you must stop using the Site. We encourage you to review these Terms periodically to stay informed of any updates.
+        </p>
+
+        <!-- 11. Governing Law -->
+        <h2><span class="policy-num">11</span> Governing Law</h2>
+        <p>
+          These Terms and any dispute or claim arising out of or related to them, their subject matter, or their formation shall be governed by and construed in accordance with the laws of the <strong>State of New Jersey, USA</strong>, without regard to its conflict of law provisions.
+        </p>
+        <p>
+          You agree that any legal action or proceeding relating to these Terms or your use of the Site shall be brought exclusively in the state or federal courts located in New Jersey, and you hereby consent to the personal jurisdiction of those courts. Any claim or cause of action you may have with respect to the Site must be commenced within one (1) year after the claim or cause of action arises, or it shall be permanently barred.
+        </p>
+
+        <!-- 12. Contact Us -->
+        <h2><span class="policy-num">12</span> Contact Us</h2>
+        <p>
+          If you have any questions, concerns, or requests regarding these Terms of Service, please contact us:
+        </p>
+        <ul>
+          <li><strong>SE:MORE LLC</strong></li>
+          <li>Central New Jersey, USA</li>
+          <li>Email: <a href="mailto:se3morellc@gmail.com">se3morellc@gmail.com</a></li>
+        </ul>
+        <p>
+          We will make every effort to respond to your inquiry in a timely manner.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <span class="logo-se">SE</span><span class="logo-colon"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></span><span class="logo-more">MORE</span>
+          </a>
+          <p>Helping businesses see more possibilities through smart technology.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="index.html#about">About</a>
+            <a href="index.html#services">Services</a>
+            <a href="index.html#how-it-works">Process</a>
+            <a href="index.html#contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="services/automation.html">Automation</a>
+            <a href="services/ai-integration.html">AI Integration</a>
+            <a href="services/modernization.html">Modernization</a>
+            <a href="services/consulting.html">Consulting</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SE:MORE. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AI Chat Widget -->
+  <div class="chat-widget" id="chatWidget">
+    <button class="chat-toggle" id="chatToggle" aria-label="Chat with SE:MORE AI">
+      <span class="chat-icon-open chat-toggle-eyes">
+        <span class="toggle-eye"></span>
+        <span class="toggle-eye"></span>
+      </span>
+      <svg class="chat-icon-close" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span class="chat-badge">AI</span>
+    </button>
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <span class="chat-avatar">
+            <span class="mini-eye"></span>
+            <span class="mini-eye"></span>
+          </span>
+          <div>
+            <span class="chat-header-title">SE:MORE AI</span>
+            <span class="chat-header-status"><span class="status-dot"></span>Online, ask anything</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg bot">
+          <div class="chat-bubble">Hey! I'm the SE:MORE AI assistant. Ask me anything about our services, how we work, or how we can help your business.</div>
+        </div>
+        <div class="chat-quick-replies" id="chatQuickReplies">
+          <button class="quick-reply" data-msg="What services do you offer?">Your services</button>
+          <button class="quick-reply" data-msg="How does your process work?">How it works</button>
+          <button class="quick-reply" data-msg="Who are the founders?">Meet the team</button>
+          <button class="quick-reply" data-msg="How can you help my business?">Help my business</button>
+        </div>
+      </div>
+      <form class="chat-input-wrap" id="chatForm">
+        <input type="text" id="chatInput" placeholder="Ask about SE:MORE..." autocomplete="off">
+        <button type="submit" aria-label="Send">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

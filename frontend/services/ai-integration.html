@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Integration | SE:MORE</title>
+  <meta name="description" content="SE:MORE embeds AI into your existing business systems, chat agents, document understanding, predictive analytics, and more, without disruption or rip-and-replace.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Page Loader + Eye Zoom stubs, required by script.js, kept hidden on subpages -->
+  <div class="page-loader" id="pageLoader" style="display:none"></div>
+  <div class="eye-zoom-overlay" id="eyeZoomOverlay" style="display:none"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="logo-se">SE</span><span class="logo-colon"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></span><span class="logo-more">MORE</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html#about">About</a></li>
+        <li class="nav-item-dropdown">
+          <a href="../index.html#services">Services <span class="nav-caret">▾</span></a>
+          <div class="nav-dropdown">
+            <a href="automation.html"><span class="nav-dropdown-icon">⚙️</span>Automation</a>
+            <a href="ai-integration.html"><span class="nav-dropdown-icon">🤖</span>AI Integration</a>
+            <a href="modernization.html"><span class="nav-dropdown-icon">🔧</span>Modernization</a>
+            <a href="consulting.html"><span class="nav-dropdown-icon">📊</span>Consulting</a>
+          </div>
+        </li>
+        <li><a href="../index.html#why-us">Why Us</a></li>
+        <li><a href="../index.html#how-it-works">How It Works</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="../index.html#contact" class="btn btn-primary btn-nav">Book a Consultation</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       SERVICE HERO
+  ════════════════════════════════════════ -->
+  <section class="service-page-hero">
+    <div class="hero-bg">
+      <div class="grid-lines"></div>
+      <div class="floating-shape shape-1"></div>
+      <div class="floating-shape shape-2"></div>
+      <div class="floating-shape shape-3"></div>
+      <div class="floating-shape shape-4"></div>
+      <div class="scan-line"></div>
+      <div class="scan-line scan-line-2"></div>
+    </div>
+    <div class="container">
+      <div class="service-page-badge">🤖 AI INTEGRATION</div>
+      <h1>Intelligence Built Into Your Business,<br><span class="gradient-text">Not Bolted On</span></h1>
+      <p class="hero-sub">We embed AI capabilities into the platforms your team already uses, CRMs, ERPs, helpdesks, databases, and custom apps, so you gain measurable intelligence without switching tools, retraining staff, or disrupting live operations.</p>
+      <div class="hero-actions">
+        <a href="../index.html#contact" class="btn btn-primary btn-lg btn-glow">
+          <span>Start AI Integration</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#use-cases" class="btn btn-ghost btn-lg">
+          <span>See Use Cases</span>
+        </a>
+      </div>
+      <div class="service-stat-row">
+        <div class="service-stat-item">
+          <div class="stat-num">35%</div>
+          <div class="stat-label">Reduction in support load</div>
+        </div>
+        <div class="service-stat-item">
+          <div class="stat-num">3x</div>
+          <div class="stat-label">Faster data processing</div>
+        </div>
+        <div class="service-stat-item">
+          <div class="stat-num">No rip-and-replace</div>
+          <div class="stat-label">Zero full system replacements</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       USE CASES
+  ════════════════════════════════════════ -->
+  <section class="service-use-cases" id="use-cases">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Use Cases</span>
+        <h2 class="section-title">What We Build <span class="gradient-text">With AI</span></h2>
+        <p class="section-sub">From intelligent chat agents to computer vision, we integrate AI where it creates the most impact, right inside your existing tools and workflows.</p>
+      </div>
+      <div class="use-case-grid">
+
+        <div class="use-case-card">
+          <div class="use-case-icon">💬</div>
+          <h4>AI Chat Agents</h4>
+          <p>Intelligent assistants trained on your products, processes, and FAQs. Handle support, sales, and onboarding queries around the clock without adding headcount.</p>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-icon">📝</div>
+          <h4>Document Understanding</h4>
+          <p>Extract, classify, and summarize documents automatically. Turn invoices, contracts, applications, and reports into structured, actionable data in seconds.</p>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-icon">🔮</div>
+          <h4>Predictive Analytics</h4>
+          <p>Forecast demand, churn, revenue, and other key business metrics with machine learning models trained directly on your historical data.</p>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-icon">🎯</div>
+          <h4>Smart Recommendations</h4>
+          <p>Suggest next best actions for sales, support, or operations. Surface the right product, response, or follow-up at exactly the right moment for every user.</p>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-icon">🔍</div>
+          <h4>AI-Powered Search</h4>
+          <p>Semantic search across your internal knowledge base or product catalog. Find what people mean, not just what they type, using vector embeddings and RAG.</p>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-icon">👁️</div>
+          <h4>Computer Vision</h4>
+          <p>Automate quality control, document scanning, or visual inspection. Detect defects, read images, and dramatically cut manual review labor on production floors.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PROCESS
+  ════════════════════════════════════════ -->
+  <section class="service-process" id="process">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Our Approach</span>
+        <h2 class="section-title">How We <span class="gradient-text">Integrate AI</span></h2>
+        <p class="section-sub">A proven four-step method that delivers measurable AI outcomes, fast, clean, and without disrupting your existing operations or team.</p>
+      </div>
+      <div class="process-steps-h">
+
+        <div class="process-step-h">
+          <div class="process-step-num">🔍</div>
+          <h4>Audit</h4>
+          <p>Identify where AI creates the most value in your current workflows, no generic playbooks, only what is right for your specific business context and team.</p>
+        </div>
+
+        <div class="process-step-h">
+          <div class="process-step-num">🎯</div>
+          <h4>Select</h4>
+          <p>Choose the right models and architecture for your use case and budget, GPT-4o, Claude, Llama, Mistral, or custom fine-tuned models purpose-built for your data.</p>
+        </div>
+
+        <div class="process-step-h">
+          <div class="process-step-num">🔌</div>
+          <h4>Integrate</h4>
+          <p>Connect AI to your existing systems via APIs, webhooks, and custom middleware with minimal disruption to your live operations and daily team workflows.</p>
+        </div>
+
+        <div class="process-step-h">
+          <div class="process-step-num">📊</div>
+          <h4>Measure</h4>
+          <p>Track impact with real KPIs, reduced costs, more throughput, higher quality. We iterate continuously to keep improving results long after launch.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TOOLS & FRAMEWORKS
+  ════════════════════════════════════════ -->
+  <section class="service-tools" id="tools">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Tech Stack</span>
+        <h2 class="section-title">AI Models and Frameworks <span class="gradient-text">We Work With</span></h2>
+        <p class="section-sub">We are model-agnostic and framework-flexible. We pick the right tools for your specific needs and budget, not the trendiest ones.</p>
+      </div>
+      <div class="tools-grid">
+        <span class="tool-chip">OpenAI GPT-4o</span>
+        <span class="tool-chip">Anthropic Claude</span>
+        <span class="tool-chip">Groq Llama</span>
+        <span class="tool-chip">Mistral</span>
+        <span class="tool-chip">LangChain</span>
+        <span class="tool-chip">LlamaIndex</span>
+        <span class="tool-chip">Pinecone</span>
+        <span class="tool-chip">Weaviate</span>
+        <span class="tool-chip">Python</span>
+        <span class="tool-chip">FastAPI</span>
+        <span class="tool-chip">OpenAI Embeddings</span>
+        <span class="tool-chip">RAG Pipelines</span>
+        <span class="tool-chip">Fine-tuning</span>
+        <span class="tool-chip">Function Calling</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CTA
+  ════════════════════════════════════════ -->
+  <section class="service-page-cta">
+    <div class="container">
+      <a href="../index.html#services" class="back-link">← Back to all services</a>
+      <h2>Ready to Make Your Business <span class="gradient-text">AI-Native?</span></h2>
+      <p>Book a free AI consultation and discover exactly where intelligent automation can cut costs and multiply your team's output, without disrupting what is already working.</p>
+      <a href="../index.html#contact" class="btn btn-primary btn-lg btn-glow">
+        <span>Book Free AI Consult</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">
+            <span class="logo-se">SE</span><span class="logo-colon"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></span><span class="logo-more">MORE</span>
+          </a>
+          <p>Helping businesses see more possibilities through smart technology.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#how-it-works">Process</a>
+            <a href="../index.html#contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="automation.html">Automation</a>
+            <a href="ai-integration.html">AI Integration</a>
+            <a href="modernization.html">Modernization</a>
+            <a href="consulting.html">Consulting</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SE:MORE. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../privacy.html">Privacy Policy</a>
+          <a href="../terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       AI CHAT WIDGET
+  ════════════════════════════════════════ -->
+  <div class="chat-widget" id="chatWidget">
+    <button class="chat-toggle" id="chatToggle" aria-label="Chat with SE:MORE AI">
+      <span class="chat-icon-open chat-toggle-eyes">
+        <span class="toggle-eye"></span>
+        <span class="toggle-eye"></span>
+      </span>
+      <svg class="chat-icon-close" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span class="chat-badge">AI</span>
+    </button>
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <span class="chat-avatar">
+            <span class="mini-eye"></span>
+            <span class="mini-eye"></span>
+          </span>
+          <div>
+            <span class="chat-header-title">SE:MORE AI</span>
+            <span class="chat-header-status"><span class="status-dot"></span>Online, ask anything</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg bot">
+          <div class="chat-bubble">Hey! I'm the SE:MORE AI assistant. Ask me anything about our services, how we work, or how we can help your business.</div>
+        </div>
+        <div class="chat-quick-replies" id="chatQuickReplies">
+          <button class="quick-reply" data-msg="What services do you offer?">Your services</button>
+          <button class="quick-reply" data-msg="How does your process work?">How it works</button>
+          <button class="quick-reply" data-msg="Who are the founders?">Meet the team</button>
+          <button class="quick-reply" data-msg="How can you help my business?">Help my business</button>
+        </div>
+      </div>
+      <form class="chat-input-wrap" id="chatForm">
+        <input type="text" id="chatInput" placeholder="Ask about SE:MORE..." autocomplete="off">
+        <button type="submit" aria-label="Send">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- Contact form stub, required by script.js, hidden on this page -->
+  <form id="contactForm" style="display:none" aria-hidden="true">
+    <input type="text" id="name">
+    <input type="email" id="email">
+    <input type="text" id="company">
+    <textarea id="message"></textarea>
+    <button type="submit"></button>
+    <div class="form-success" id="formSuccess"></div>
+  </form>
+
+  <script src="../config.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technology Consulting | SE:MORE</title>
+  <meta name="description" content="SE:MORE Technology Consulting: Strategic technology guidance that produces measurable ROI. Free initial strategy call, actionable roadmaps, no fluff.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Page Loader (hidden on service subpages) -->
+  <div class="page-loader" id="pageLoader" style="display:none"></div>
+
+  <!-- Eye Zoom Overlay (hidden on service subpages) -->
+  <div class="eye-zoom-overlay" id="eyeZoomOverlay" style="display:none"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="logo-se">SE</span><span class="logo-colon"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></span><span class="logo-more">MORE</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html#about">About</a></li>
+        <li class="nav-item-dropdown">
+          <a href="../index.html#services">Services <span class="nav-caret">▾</span></a>
+          <div class="nav-dropdown">
+            <a href="automation.html"><span class="nav-dropdown-icon">⚙️</span>Automation</a>
+            <a href="ai-integration.html"><span class="nav-dropdown-icon">🤖</span>AI Integration</a>
+            <a href="modernization.html"><span class="nav-dropdown-icon">🔧</span>Modernization</a>
+            <a href="consulting.html"><span class="nav-dropdown-icon">📊</span>Consulting</a>
+          </div>
+        </li>
+        <li><a href="../index.html#why-us">Why Us</a></li>
+        <li><a href="../index.html#how-it-works">How It Works</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="../index.html#contact" class="btn btn-primary btn-nav">Book a Consultation</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Service Hero -->
+  <section class="service-page-hero">
+    <div class="hero-bg">
+      <div class="grid-lines"></div>
+      <div class="floating-shape shape-1"></div>
+      <div class="floating-shape shape-2"></div>
+      <div class="scan-line"></div>
+      <div class="scan-line scan-line-2"></div>
+    </div>
+    <div class="container">
+      <div class="service-page-badge">📊 TECHNOLOGY CONSULTING</div>
+      <h1>See Clearly. Move Fast. <span class="gradient-text">Win More.</span></h1>
+      <p class="hero-sub">Strategic technology guidance that cuts through complexity and produces measurable ROI. We help you make the right technology decisions, faster, with more confidence, and without the guesswork.</p>
+      <div class="hero-actions">
+        <a href="../index.html#contact" class="btn btn-primary btn-lg btn-glow">
+          <span>Book Free Consultation</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#deliverables" class="btn btn-ghost btn-lg">
+          <span>What You Get</span>
+        </a>
+      </div>
+      <div class="service-stat-row">
+        <div class="service-stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Actionable recommendations, no fluff</div>
+        </div>
+        <div class="service-stat-item">
+          <div class="stat-num">Free</div>
+          <div class="stat-label">Initial strategy call</div>
+        </div>
+        <div class="service-stat-item">
+          <div class="stat-num">30 days</div>
+          <div class="stat-label">To a clear tech roadmap</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section class="service-use-cases" id="use-cases">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Advisory Scope</span>
+        <h2 class="section-title">What We <span class="gradient-text">Advise On</span></h2>
+        <p class="section-sub">From one-time audits to ongoing strategic partnerships, we meet you where you are and guide you forward with clarity.</p>
+      </div>
+      <div class="use-case-grid">
+        <div class="use-case-card" data-aos>
+          <div class="use-case-icon">🔍</div>
+          <h4>Technology Audit</h4>
+          <p>Deep review of your current stack, costs, and capability gaps. Understand exactly what you have, what it's costing you, and where the cracks are before making your next move.</p>
+        </div>
+        <div class="use-case-card" data-aos>
+          <div class="use-case-icon">⚖️</div>
+          <h4>Build vs Buy Analysis</h4>
+          <p>Objective assessment of whether to build custom software or adopt existing tools. We weigh long-term cost, control, speed, and risk so you choose the path that actually makes sense.</p>
+        </div>
+        <div class="use-case-card" data-aos>
+          <div class="use-case-icon">🤝</div>
+          <h4>Vendor Selection</h4>
+          <p>Evaluate and recommend the right software vendors for your needs. We cut through sales pitches and feature bloat to match you with tools that fit your team, budget, and goals.</p>
+        </div>
+        <div class="use-case-card" data-aos>
+          <div class="use-case-icon">🗺️</div>
+          <h4>Digital Roadmap</h4>
+          <p>A 6–12 month prioritized technology investment plan with clear ROI targets. Know exactly what to build, buy, or retire, and in what order, to maximize impact and minimize waste.</p>
+        </div>
+        <div class="use-case-card" data-aos>
+          <div class="use-case-icon">🏗️</div>
+          <h4>Architecture Review</h4>
+          <p>Expert assessment of your system architecture for scale, security, and cost. Identify technical debt, single points of failure, and the architectural decisions holding back your growth.</p>
+        </div>
+        <div class="use-case-card" data-aos>
+          <div class="use-case-icon">👥</div>
+          <h4>Team &amp; Process Alignment</h4>
+          <p>Align your technology decisions with your team's capabilities and culture. The best technology is useless without adoption, we make sure your people are ready to execute.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deliverables Section -->
+  <section class="service-process" id="deliverables">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Engagement Model</span>
+        <h2 class="section-title">What You <span class="gradient-text">Walk Away With</span></h2>
+        <p class="section-sub">Every consulting engagement follows a proven structure designed to move you from uncertainty to a clear, confident technology direction.</p>
+      </div>
+      <div class="process-steps-h">
+        <div class="process-step-h" data-aos>
+          <div class="process-step-num">📞</div>
+          <h4>Discovery Call</h4>
+          <p>Free 60-minute call to understand your business, stack, and goals. No pitch. Just listening and asking the right questions.</p>
+        </div>
+        <div class="process-step-h" data-aos>
+          <div class="process-step-num">📋</div>
+          <h4>Audit Report</h4>
+          <p>Written analysis of your current technology state with gap identification. A clear, jargon-free document you can act on immediately.</p>
+        </div>
+        <div class="process-step-h" data-aos>
+          <div class="process-step-num">🗺️</div>
+          <h4>Prioritized Roadmap</h4>
+          <p>Ranked list of technology investments by ROI impact and feasibility. Not a wish list, a practical execution plan sorted by what moves the needle most.</p>
+        </div>
+        <div class="process-step-h" data-aos>
+          <div class="process-step-num">🤝</div>
+          <h4>Ongoing Advisory</h4>
+          <p>Optional retainer for continued strategic guidance as you execute. Keep a senior technology advisor in your corner as decisions unfold.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Areas of Expertise Section -->
+  <section class="service-tools" id="expertise">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Expertise</span>
+        <h2 class="section-title">Areas of <span class="gradient-text">Expertise</span></h2>
+        <p class="section-sub">Our consulting spans a wide range of technology disciplines so you get comprehensive guidance regardless of where your challenges lie.</p>
+      </div>
+      <div class="tools-grid">
+        <span class="tool-chip">Cloud Strategy</span>
+        <span class="tool-chip">SaaS Evaluation</span>
+        <span class="tool-chip">AI Strategy</span>
+        <span class="tool-chip">Data Architecture</span>
+        <span class="tool-chip">Security Review</span>
+        <span class="tool-chip">Cost Optimization</span>
+        <span class="tool-chip">Team Scaling</span>
+        <span class="tool-chip">API Design</span>
+        <span class="tool-chip">Product Strategy</span>
+        <span class="tool-chip">MVP Planning</span>
+        <span class="tool-chip">Tech Debt Assessment</span>
+        <span class="tool-chip">Vendor Negotiation</span>
+        <span class="tool-chip">Compliance</span>
+        <span class="tool-chip">Digital Transformation</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="service-page-cta">
+    <div class="container">
+      <h2>Your First Consultation <span class="gradient-text">Is Always Free</span></h2>
+      <p>No obligation. No jargon. Just clarity on your next best technology move.</p>
+      <a href="../index.html#contact" class="btn btn-primary btn-lg btn-glow">
+        <span>Book My Free Call</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <br><br>
+      <a href="../index.html#services" class="back-link">← Back to all services</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">
+            <span class="logo-se">SE</span><span class="logo-colon"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></span><span class="logo-more">MORE</span>
+          </a>
+          <p>Helping businesses see more possibilities through smart technology.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#how-it-works">Process</a>
+            <a href="../index.html#contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="automation.html">Automation</a>
+            <a href="ai-integration.html">AI Integration</a>
+            <a href="modernization.html">Modernization</a>
+            <a href="consulting.html">Consulting</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SE:MORE. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../privacy.html">Privacy Policy</a>
+          <a href="../terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AI Chat Widget -->
+  <div class="chat-widget" id="chatWidget">
+    <button class="chat-toggle" id="chatToggle" aria-label="Chat with SE:MORE AI">
+      <span class="chat-icon-open chat-toggle-eyes">
+        <span class="toggle-eye"></span>
+        <span class="toggle-eye"></span>
+      </span>
+      <svg class="chat-icon-close" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span class="chat-badge">AI</span>
+    </button>
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <span class="chat-avatar">
+            <span class="mini-eye"></span>
+            <span class="mini-eye"></span>
+          </span>
+          <div>
+            <span class="chat-header-title">SE:MORE AI</span>
+            <span class="chat-header-status"><span class="status-dot"></span>Online, ask anything</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg bot">
+          <div class="chat-bubble">Hey! I'm the SE:MORE AI assistant. Ask me anything about our consulting services, how we work, or how we can help your business navigate technology decisions.</div>
+        </div>
+        <div class="chat-quick-replies" id="chatQuickReplies">
+          <button class="quick-reply" data-msg="What does a technology audit include?">What's in an audit?</button>
+          <button class="quick-reply" data-msg="How does the free consultation work?">Free consultation</button>
+          <button class="quick-reply" data-msg="What services do you offer?">All services</button>
+          <button class="quick-reply" data-msg="How can you help my business?">Help my business</button>
+        </div>
+      </div>
+      <form class="chat-input-wrap" id="chatForm">
+        <input type="text" id="chatInput" placeholder="Ask about SE:MORE..." autocomplete="off">
+        <button type="submit" aria-label="Send">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script src="../config.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -1,1 +1,5 @@
 config.js
+frontend/config.js
+node_modules/
+.env
+.DS_Store

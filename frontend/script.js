@@ -5,6 +5,27 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ── Page Loader + Eye Zoom Intro ─────────
+  const loader = document.getElementById('pageLoader');
+  const eyeOverlay = document.getElementById('eyeZoomOverlay');
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      loader.classList.add('loaded');
+      eyeOverlay.classList.add('active');
+
+      setTimeout(() => {
+        eyeOverlay.classList.add('expanding');
+
+        setTimeout(() => {
+          eyeOverlay.classList.add('done');
+          loader.style.display = 'none';
+          document.body.classList.add('page-ready');
+        }, 1300);
+      }, 400);
+    }, 1000);
+  });
+
   // ── Theme Toggle ──────────────────────────
   const themeToggle = document.getElementById('themeToggle');
   const html = document.documentElement;
@@ -54,6 +75,35 @@ document.addEventListener('DOMContentLoaded', () => {
     cursorX = e.clientX;
     cursorY = e.clientY;
   });
+
+  // ── Custom Cursor ─────────────────────────
+  const cursorDot = document.getElementById('cursorDot');
+  const cursorRing = document.getElementById('cursorRing');
+  let ringX = window.innerWidth / 2;
+  let ringY = window.innerHeight / 2;
+
+  function animateCursor() {
+    if (cursorDot) {
+      cursorDot.style.left = cursorX + 'px';
+      cursorDot.style.top = cursorY + 'px';
+    }
+    ringX += (cursorX - ringX) * 0.12;
+    ringY += (cursorY - ringY) * 0.12;
+    if (cursorRing) {
+      cursorRing.style.left = ringX + 'px';
+      cursorRing.style.top = ringY + 'px';
+    }
+    requestAnimationFrame(animateCursor);
+  }
+
+  if (cursorDot || cursorRing) {
+    animateCursor();
+    const hoverTargets = document.querySelectorAll('a, button, .service-card, .why-card, .founder-card, .result-card, [data-tilt]');
+    hoverTargets.forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing && cursorRing.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => cursorRing && cursorRing.classList.remove('hovering'));
+    });
+  }
 
   // ── Cursor-Tracking Eyes ──────────────────
   function trackEyes() {
@@ -154,9 +204,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
       }
       draw() {
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        const lightness = isDark ? '65%' : '40%';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${this.hue}, 80%, 65%, ${this.opacity})`;
+        ctx.fillStyle = `hsla(${this.hue}, 80%, ${lightness}, ${this.opacity})`;
         ctx.fill();
       }
     }
@@ -172,10 +224,12 @@ document.addEventListener('DOMContentLoaded', () => {
           const dy = particles[i].y - particles[j].y;
           const dist = Math.hypot(dx, dy);
           if (dist < 120) {
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            const lineColor = isDark ? `rgba(125, 204, 248, ${0.06 * (1 - dist / 120)})` : `rgba(0, 77, 43, ${0.08 * (1 - dist / 120)})`;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(125, 204, 248, ${0.06 * (1 - dist / 120)})`;
+            ctx.strokeStyle = lineColor;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -268,6 +322,21 @@ document.addEventListener('DOMContentLoaded', () => {
       card.style.transform = '';
       card.style.transition = 'transform 0.5s ease';
       setTimeout(() => { card.style.transition = ''; }, 500);
+    });
+  });
+
+  // ── Magnetic Buttons ──────────────────────
+  document.querySelectorAll('.btn, .cta-btn').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const bx = rect.left + rect.width / 2;
+      const by = rect.top + rect.height / 2;
+      btn.style.transform = `translate(${(e.clientX - bx) * 0.15}px, ${(e.clientY - by) * 0.15}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+      btn.style.transition = 'transform 0.4s cubic-bezier(0.23, 1, 0.32, 1)';
+      setTimeout(() => { btn.style.transition = ''; }, 400);
     });
   });
 
@@ -430,45 +499,75 @@ document.addEventListener('DOMContentLoaded', () => {
   const GROQ_KEY = (typeof SEMORE_CONFIG !== 'undefined' && SEMORE_CONFIG.GROQ_API_KEY) || '';
   const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
-  const SYSTEM_PROMPT = `You are the SE:MORE AI assistant on the SE:MORE website. You answer questions about the company, its services, founders, and how it can help businesses.
+  const SYSTEM_PROMPT = `You are the SE:MORE AI assistant embedded on the SE:MORE company website. You are knowledgeable, friendly, and concise. Answer questions about the company, its founders, services, location, process, and how it can help businesses.
 
-ABOUT SE:MORE:
-SE:MORE is a technology-enablement company that helps businesses see more ways to grow, profit, and operate smarter through technology. The name "SE:MORE" uses the colon as two eyes, representing vision, clarity, and insight. The company is based in New York, USA and works remotely worldwide. Email: se3morellc@gmail.com
+COMPANY OVERVIEW:
+SE:MORE LLC is a technology-enablement company headquartered in Central New Jersey, USA. The company operates remotely and serves businesses across the United States and worldwide. SE:MORE helps businesses see more ways to grow, profit, and operate smarter through targeted technology solutions. The company name "SE:MORE" uses the colon as two eyes, symbolizing vision, clarity, and the ability to see opportunities others miss.
+- Email: se3morellc@gmail.com
+- Headquarters: Central New Jersey, USA
+- Google Maps: https://www.google.com/maps/place/SE:MORE/@40.5857762,-74.376456,15z
+- Website: Current page
 
 FOUNDERS:
-- Hitayu Parikh — Co-Founder (LinkedIn: linkedin.com/in/hitayu-parikh/)
-- Mohit Unecha — Co-Founder (LinkedIn: linkedin.com/in/mohitunecha/)
+1. Hitayu Parikh - Co-Founder
+   - LinkedIn: https://www.linkedin.com/in/hitayu-parikh/
+   - Brings expertise in technology strategy, business operations, and building scalable systems
+   - Passionate about translating complex technology into tangible business value
+   - Based in New Jersey, USA
 
-WHAT SE:MORE DOES:
-1. Automate manual workflows — eliminate repetitive tasks, save hours weekly
-2. Integrate AI into existing systems — no rip-and-replace needed
-3. Modernize outdated tools — bridge legacy and new systems seamlessly
-4. Build profitable tech solutions — reduce costs, increase revenue from day one
+2. Mohit Unecha - Co-Founder
+   - LinkedIn: https://www.linkedin.com/in/mohitunecha/
+   - Brings expertise in software engineering, AI integration, and product development
+   - Focused on building practical, results-driven tech solutions for businesses
+   - Based in New Jersey, USA
+
+Both founders built SE:MORE from the belief that most businesses already have the data and tools they need - they just need the right partner to help them see and unlock the value hidden within.
+
+SERVICES (what SE:MORE does):
+1. Automate Manual Workflows - Identify and eliminate repetitive, time-consuming tasks. Build custom automations that save your team 10-20+ hours per week and reduce human error.
+2. Integrate AI Into Existing Systems - Embed intelligent AI capabilities (chatbots, data analysis, smart recommendations) into the platforms you already use, with no rip-and-replace required.
+3. Modernize Outdated Tools - Upgrade and bridge legacy systems to modern infrastructure without the disruption of starting from scratch.
+4. Build Profitable Tech Solutions - Design and develop simple, focused solutions (apps, dashboards, integrations) that directly reduce costs and increase revenue from day one.
+5. Technology Consulting - Strategic guidance on which technology investments will deliver the highest ROI for your specific business situation.
+
+THE SE:MORE PROCESS (3 steps):
+Step 1 - "We See" (Discovery and Clarity): Deep audit of your workflows, tools, data, and pain points. We identify bottlenecks, hidden costs, and untapped opportunities invisible from the inside.
+Step 2 - "We Simplify" (Strategy and Solution Design): Clear, actionable technology roadmap with no jargon or fluff. We design solutions tailored to your exact business reality and budget.
+Step 3 - "You Scale" (Implementation and Optimization): We build, deploy, and optimize the solution. You receive measurable results - more efficiency, more revenue, more growth. We stay on to iterate.
 
 WHY SE:MORE IS DIFFERENT:
-- Insight-driven: data-backed solutions, not guesswork
-- Uses what the business already has: no expensive replacements
-- Fast implementation: delivers in weeks, not months
-- Measurable results: clear KPIs on every engagement
+- Insight-driven: Every recommendation is backed by data analysis of your actual operations - no guesswork
+- Uses what you already have: We enhance existing tools and systems rather than forcing expensive replacements
+- Fast delivery: Working solutions delivered in weeks, not 18-month enterprise timelines
+- Measurable results: Every engagement has clear KPIs. If it does not move the needle, we do not do it
+- Human-centric: Technology should serve people - we keep solutions simple and trainable
+- Small business friendly: We work with businesses of all sizes, not just enterprise clients
 
-PROCESS:
-Step 1: "We See" — Discovery & clarity, audit workflows, tools, data
-Step 2: "We Simplify" — Strategy & solution design, clear actionable roadmaps
-Step 3: "You Scale" — Implementation & optimization, measurable results
+PROVEN RESULTS:
+- Clients save an average of 20+ hours per week through workflow automation
+- 35% average reduction in customer support load via AI integration
+- Zero legacy systems needed to be fully replaced - all were streamlined and modernized in place
+- Multiple clients have seen ROI within the first 30-60 days of implementation
 
-RESULTS:
-- Saved clients 20+ hours/week through automation
-- Reduced customer support load by 35% via AI integration
-- Streamlined operations without replacing legacy systems
+BRAND VALUES:
+Vision, Simplicity, Insight, Human-Centric Technology, Measurable Impact, Speed
 
-BRAND VALUES: Vision, Simplicity, Insight, Human-Centric Technology
+LOCATION / ABOUT NJ HQ:
+SE:MORE is based in Central New Jersey, a hub of business and technology activity between New York City and Philadelphia. The team works remotely and travels to client sites as needed across the country. Central NJ location allows SE:MORE to serve the dense tri-state business ecosystem (NJ, NY, CT) as well as clients nationwide.
 
-INSTRUCTIONS:
-- Be friendly, concise, and helpful
-- Keep responses to 2-3 sentences unless more detail is asked for
-- If asked about pricing, say to book a free consultation for custom quotes
-- If asked about things unrelated to SE:MORE, politely redirect
-- Encourage visitors to book a consultation or email se3morellc@gmail.com`;
+GOOGLE MAPS LISTING:
+SE:MORE is listed on Google Maps. Visitors can find the business, check reviews, or leave a review at: https://www.google.com/maps/place/SE:MORE/@40.5857762,-74.376456,15z
+
+INSTRUCTIONS FOR RESPONDING:
+- Be friendly, warm, and conversational - not robotic
+- Keep responses to 2-3 sentences unless the user asks for detailed information
+- If asked about pricing, explain that SE:MORE offers custom quotes based on scope and always start with a free consultation
+- If asked about founders' specific backgrounds or LinkedIn profiles, share their LinkedIn URLs and what you know about them
+- If asked about location, confirm Central New Jersey HQ with remote work capability
+- If someone wants to get started, direct them to book a free consultation at the contact form or email se3morellc@gmail.com
+- If asked about Google reviews, share the Maps link
+- If the question is unrelated to SE:MORE or business technology, politely redirect`;
+
 
   const chatWidget = document.getElementById('chatWidget');
   const chatToggle = document.getElementById('chatToggle');
@@ -479,7 +578,7 @@ INSTRUCTIONS:
 
   let chatHistory = [
     { role: 'system', content: SYSTEM_PROMPT },
-    { role: 'assistant', content: "Hey! I'm the SE:MORE AI assistant. Ask me anything about our services, how we work, our founders, or how we can help your business. What would you like to know?" }
+    { role: 'assistant', content: "Hey! I'm the SE:MORE AI assistant. Ask me anything about our services, how we work, or how we can help your business." }
   ];
 
   chatToggle.addEventListener('click', () => {
@@ -494,11 +593,30 @@ INSTRUCTIONS:
     div.className = `chat-msg ${sender}`;
     const bubble = document.createElement('div');
     bubble.className = 'chat-bubble';
-    bubble.textContent = text;
+    if (sender === 'bot') {
+      bubble.innerHTML = formatBotText(text);
+    } else {
+      bubble.textContent = text;
+    }
     div.appendChild(bubble);
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
     return div;
+  }
+
+  function formatBotText(text) {
+    let html = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br>');
+    html = html.replace(
+      /(https?:\/\/[^\s<]+)/g,
+      '<a href="$1" target="_blank" rel="noopener" style="color:var(--gulf-blue);text-decoration:underline;">$1</a>'
+    );
+    html = html.replace(
+      /se3morellc@gmail\.com/g,
+      '<a href="mailto:se3morellc@gmail.com" style="color:var(--gulf-blue);text-decoration:underline;">se3morellc@gmail.com</a>'
+    );
+    return html;
   }
 
   function addTypingIndicator() {
@@ -560,9 +678,104 @@ INSTRUCTIONS:
     const msg = chatInput.value.trim();
     if (!msg) return;
 
+    hideQuickReplies();
     addMessage(msg, 'user');
     chatInput.value = '';
     sendToGroq(msg);
+  });
+
+  // Quick reply chips
+  const quickReplies = document.getElementById('chatQuickReplies');
+  function hideQuickReplies() {
+    if (quickReplies) quickReplies.style.display = 'none';
+  }
+
+  document.querySelectorAll('.quick-reply').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const msg = btn.getAttribute('data-msg');
+      hideQuickReplies();
+      addMessage(msg, 'user');
+      sendToGroq(msg);
+    });
+  });
+
+  // ── Back to Top Button ────────────────────
+  const backToTop = document.getElementById('backToTop');
+
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 600);
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ── Enhanced Scroll Reveal ──────────────
+  const revealElements = document.querySelectorAll('.section-header, .about-text, .about-visual, .why-card, .result-card, .cta-inner, .contact-info, .contact-form');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('reveal-up', 'visible');
+        }, i * 80);
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  revealElements.forEach(el => {
+    el.classList.add('reveal-up');
+    revealObs.observe(el);
+  });
+
+  // ── Smooth number count on result cards ──
+  const resultMetrics = document.querySelectorAll('.result-metric');
+  const metricObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.transition = 'transform 0.5s ease';
+        entry.target.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+          entry.target.style.transform = 'scale(1)';
+        }, 500);
+        metricObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  resultMetrics.forEach(m => metricObs.observe(m));
+
+  // ── Scroll Progress Bar ───────────────────
+  const scrollBar = document.createElement('div');
+  scrollBar.style.cssText = 'position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--gulf-blue),var(--brg-glow));z-index:99999;transition:width 0.1s linear;pointer-events:none;border-radius:0 2px 2px 0;';
+  document.body.appendChild(scrollBar);
+
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    scrollBar.style.width = Math.min(pct, 100) + '%';
+  }, { passive: true });
+
+  // ── Text Scramble on Nav Hover ─────────────
+  const scrambleChars = 'SE:MORE>?@#$*+!';
+  document.querySelectorAll('.nav-links a').forEach(el => {
+    const original = el.textContent;
+    let scrambleTimer;
+    el.addEventListener('mouseenter', () => {
+      let frame = 0;
+      clearInterval(scrambleTimer);
+      scrambleTimer = setInterval(() => {
+        el.textContent = original.split('').map((ch, i) => {
+          if (i < frame) return original[i];
+          return ch === ' ' ? ' ' : scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+        }).join('');
+        frame++;
+        if (frame >= original.length) clearInterval(scrambleTimer);
+      }, 40);
+    });
+    el.addEventListener('mouseleave', () => {
+      clearInterval(scrambleTimer);
+      el.textContent = original;
+    });
   });
 
 });
