@@ -9,22 +9,50 @@ document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('pageLoader');
   const eyeOverlay = document.getElementById('eyeZoomOverlay');
 
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      loader.classList.add('loaded');
-      eyeOverlay.classList.add('active');
+  // Skip intro if already played this session (e.g. returning from subpages)
+  const introPlayed = sessionStorage.getItem('semore-intro-played');
+  const isSubpage = !eyeOverlay || eyeOverlay.style.display === 'none';
 
+  if (introPlayed || isSubpage) {
+    if (loader) loader.style.display = 'none';
+    if (eyeOverlay) eyeOverlay.style.display = 'none';
+    document.body.classList.add('page-ready');
+  } else {
+    window.addEventListener('load', () => {
       setTimeout(() => {
-        eyeOverlay.classList.add('expanding');
+        loader.classList.add('loaded');
+        eyeOverlay.classList.add('active');
+
+        // Phase 1: Eyes appear (entrance animation in CSS)
+        // Phase 2: Pupils "look around" tracking cursor
+        setTimeout(() => {
+          eyeOverlay.classList.add('looking');
+        }, 900);
+
+        // Phase 3: Natural blink
+        setTimeout(() => {
+          eyeOverlay.classList.add('blink');
+        }, 2200);
+
+        // Phase 4: Blink ends, pupils dilate, then cinematic zoom
+        setTimeout(() => {
+          eyeOverlay.classList.remove('blink');
+          eyeOverlay.classList.add('dilate');
+        }, 2450);
 
         setTimeout(() => {
-          eyeOverlay.classList.add('done');
-          loader.style.display = 'none';
-          document.body.classList.add('page-ready');
-        }, 1300);
-      }, 400);
-    }, 1000);
-  });
+          eyeOverlay.classList.add('expanding');
+
+          setTimeout(() => {
+            eyeOverlay.classList.add('done');
+            loader.style.display = 'none';
+            document.body.classList.add('page-ready');
+            sessionStorage.setItem('semore-intro-played', '1');
+          }, 1800);
+        }, 2800);
+      }, 600);
+    });
+  }
 
   // ── Theme Toggle ──────────────────────────
   const themeToggle = document.getElementById('themeToggle');
@@ -523,12 +551,55 @@ FOUNDERS:
 
 Both founders built SE:MORE from the belief that most businesses already have the data and tools they need - they just need the right partner to help them see and unlock the value hidden within.
 
-SERVICES (what SE:MORE does):
-1. Automate Manual Workflows - Identify and eliminate repetitive, time-consuming tasks. Build custom automations that save your team 10-20+ hours per week and reduce human error.
-2. Integrate AI Into Existing Systems - Embed intelligent AI capabilities (chatbots, data analysis, smart recommendations) into the platforms you already use, with no rip-and-replace required.
-3. Modernize Outdated Tools - Upgrade and bridge legacy systems to modern infrastructure without the disruption of starting from scratch.
-4. Build Profitable Tech Solutions - Design and develop simple, focused solutions (apps, dashboards, integrations) that directly reduce costs and increase revenue from day one.
-5. Technology Consulting - Strategic guidance on which technology investments will deliver the highest ROI for your specific business situation.
+SERVICES (4 core offerings):
+
+1. WORKFLOW AUTOMATION
+   Eliminate repetitive manual work through smart workflow automation. Save 20+ hours per week, reduce errors by 95%, and see ROI in 30 days.
+   What we automate:
+   - Invoice & payment processing (auto-match to POs, flag discrepancies, trigger payment runs)
+   - CRM data entry (sync contacts, auto-update records, log calls/emails/meetings)
+   - Report generation (scheduled, self-building reports delivered on time)
+   - Email & notification workflows (onboarding sequences, follow-ups, alerts, escalations)
+   - Inventory & order management (real-time sync, low-stock alerts, reorder triggers)
+   - Employee onboarding (account provisioning, document routing, training checklists)
+   Our process: Discover -> Design -> Build -> Optimize
+   Tools: Zapier, Make.com, Python, n8n, Webhooks, REST APIs, Google Workspace, Microsoft 365, Airtable, Notion, Slack, HubSpot, Salesforce, Custom Scripts
+
+2. AI INTEGRATION
+   Embed AI into existing business systems without rip-and-replace. 35% reduction in support load, 3x faster data processing.
+   What we build:
+   - AI chat agents (trained on your products, processes, FAQs)
+   - Document understanding (extract, classify, summarize invoices, contracts, reports)
+   - Predictive analytics (forecast demand, churn, revenue with ML models)
+   - Smart recommendations (next best actions for sales, support, operations)
+   - AI-powered search (semantic search with vector embeddings and RAG)
+   - Computer vision (quality control, document scanning, visual inspection)
+   Our process: Audit -> Select -> Integrate -> Measure
+   Tech: OpenAI GPT-4o, Anthropic Claude, Groq Llama, Mistral, LangChain, LlamaIndex, Pinecone, Weaviate, Python, FastAPI, RAG Pipelines, Fine-tuning, Function Calling
+
+3. SYSTEM MODERNIZATION
+   Upgrade legacy tech stacks without disruption. Zero big-bang rip-outs, 4-8 week typical sprint, zero downtime migration guarantee.
+   What we modernize:
+   - Legacy databases (migrate to cloud-native with full data integrity)
+   - Desktop apps (transform to web-based, accessible tools)
+   - Spreadsheet operations (convert to automated real-time dashboards)
+   - On-premise to cloud (AWS, GCP, or Azure migration)
+   - API-enable old systems (add REST or GraphQL APIs)
+   - Tech debt reduction (refactor without full rewrite)
+   Our approach: Assess -> Bridge -> Migrate -> Retire
+   Tech: AWS, Google Cloud, Azure, PostgreSQL, MongoDB, Docker, Kubernetes, React, Node.js, FastAPI, GraphQL, REST APIs, Terraform, CI/CD, GitHub Actions
+
+4. TECHNOLOGY CONSULTING
+   Strategic technology guidance with measurable ROI. Free initial strategy call, actionable roadmaps, no fluff. 30 days to a clear tech roadmap.
+   What we advise on:
+   - Technology audit (deep review of stack, costs, capability gaps)
+   - Build vs buy analysis (objective assessment of custom vs off-the-shelf)
+   - Vendor selection (cut through sales pitches, match tools to needs)
+   - Digital roadmap (6-12 month prioritized investment plan with ROI targets)
+   - Architecture review (scale, security, cost assessment)
+   - Team & process alignment (ensure adoption and execution readiness)
+   Engagement: Discovery Call -> Audit Report -> Prioritized Roadmap -> Ongoing Advisory
+   Expertise: Cloud Strategy, SaaS Evaluation, AI Strategy, Data Architecture, Security Review, Cost Optimization, Team Scaling, API Design, Product Strategy, MVP Planning, Tech Debt Assessment, Vendor Negotiation, Compliance, Digital Transformation
 
 THE SE:MORE PROCESS (3 steps):
 Step 1 - "We See" (Discovery and Clarity): Deep audit of your workflows, tools, data, and pain points. We identify bottlenecks, hidden costs, and untapped opportunities invisible from the inside.
@@ -549,23 +620,17 @@ PROVEN RESULTS:
 - Zero legacy systems needed to be fully replaced - all were streamlined and modernized in place
 - Multiple clients have seen ROI within the first 30-60 days of implementation
 
-BRAND VALUES:
-Vision, Simplicity, Insight, Human-Centric Technology, Measurable Impact, Speed
-
-LOCATION / ABOUT NJ HQ:
-SE:MORE is based in Central New Jersey, a hub of business and technology activity between New York City and Philadelphia. The team works remotely and travels to client sites as needed across the country. Central NJ location allows SE:MORE to serve the dense tri-state business ecosystem (NJ, NY, CT) as well as clients nationwide.
-
-GOOGLE MAPS LISTING:
-SE:MORE is listed on Google Maps. Visitors can find the business, check reviews, or leave a review at: https://www.google.com/maps/place/SE:MORE/@40.5857762,-74.376456,15z
+LOCATION:
+SE:MORE is based in Central New Jersey, a hub of business and technology activity between New York City and Philadelphia. The team works remotely and travels to client sites as needed. Central NJ location allows SE:MORE to serve the dense tri-state business ecosystem (NJ, NY, CT) as well as clients nationwide.
+Google Maps: https://www.google.com/maps/place/SE:MORE/@40.5857762,-74.376456,15z
 
 INSTRUCTIONS FOR RESPONDING:
 - Be friendly, warm, and conversational - not robotic
 - Keep responses to 2-3 sentences unless the user asks for detailed information
 - If asked about pricing, explain that SE:MORE offers custom quotes based on scope and always start with a free consultation
-- If asked about founders' specific backgrounds or LinkedIn profiles, share their LinkedIn URLs and what you know about them
-- If asked about location, confirm Central New Jersey HQ with remote work capability
-- If someone wants to get started, direct them to book a free consultation at the contact form or email se3morellc@gmail.com
-- If asked about Google reviews, share the Maps link
+- If asked about founders, share their LinkedIn URLs and expertise
+- If someone wants to get started, direct them to book a free consultation or email se3morellc@gmail.com
+- For detailed service questions, reference specific use cases and tools from the service descriptions above
 - If the question is unrelated to SE:MORE or business technology, politely redirect`;
 
 

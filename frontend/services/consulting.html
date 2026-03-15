@@ -22,6 +22,14 @@
   <!-- Eye Zoom Overlay (hidden on service subpages) -->
   <div class="eye-zoom-overlay" id="eyeZoomOverlay" style="display:none"></div>
 
+  <!-- Contact form stub required by script.js, hidden on this page -->
+  <div style="display:none" aria-hidden="true">
+    <form id="contactForm">
+      <input id="name"><input id="email"><input id="company"><textarea id="message"></textarea>
+      <button type="submit"></button><div id="formSuccess"></div>
+    </form>
+  </div>
+
   <!-- Navigation -->
   <nav class="navbar" id="navbar">
     <div class="container nav-container">
@@ -62,34 +70,66 @@
       <div class="grid-lines"></div>
       <div class="floating-shape shape-1"></div>
       <div class="floating-shape shape-2"></div>
+      <div class="floating-shape shape-3"></div>
+      <div class="floating-shape shape-4"></div>
       <div class="scan-line"></div>
       <div class="scan-line scan-line-2"></div>
     </div>
     <div class="container">
-      <div class="service-page-badge">📊 TECHNOLOGY CONSULTING</div>
-      <h1>See Clearly. Move Fast. <span class="gradient-text">Win More.</span></h1>
-      <p class="hero-sub">Strategic technology guidance that cuts through complexity and produces measurable ROI. We help you make the right technology decisions, faster, with more confidence, and without the guesswork.</p>
-      <div class="hero-actions">
-        <a href="../index.html#contact" class="btn btn-primary btn-lg btn-glow">
-          <span>Book Free Consultation</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a href="#deliverables" class="btn btn-ghost btn-lg">
-          <span>What You Get</span>
-        </a>
-      </div>
-      <div class="service-stat-row">
-        <div class="service-stat-item">
-          <div class="stat-num">100%</div>
-          <div class="stat-label">Actionable recommendations, no fluff</div>
+      <div class="service-hero-inner">
+        <div class="hero-text-col">
+          <div class="service-page-badge">📊 TECHNOLOGY CONSULTING</div>
+          <h1>See Clearly. Move Fast. <span class="gradient-text">Win More.</span></h1>
+          <p class="hero-sub">Strategic technology guidance that cuts through complexity and produces measurable ROI. We help you make the right technology decisions, faster, with more confidence, and without the guesswork.</p>
+          <div class="hero-actions">
+            <a href="../index.html#contact" class="btn btn-primary btn-lg btn-glow">
+              <span>Book Free Consultation</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#deliverables" class="btn btn-ghost btn-lg">
+              <span>What You Get</span>
+            </a>
+          </div>
+          <div class="service-stat-row">
+            <div class="service-stat-item">
+              <div class="stat-num">100%</div>
+              <div class="stat-label">Actionable recommendations, no fluff</div>
+            </div>
+            <div class="service-stat-item">
+              <div class="stat-num">Free</div>
+              <div class="stat-label">Initial strategy call</div>
+            </div>
+            <div class="service-stat-item">
+              <div class="stat-num">30 days</div>
+              <div class="stat-label">To a clear tech roadmap</div>
+            </div>
+          </div>
         </div>
-        <div class="service-stat-item">
-          <div class="stat-num">Free</div>
-          <div class="stat-label">Initial strategy call</div>
-        </div>
-        <div class="service-stat-item">
-          <div class="stat-num">30 days</div>
-          <div class="stat-label">To a clear tech roadmap</div>
+        <div class="service-hero-visual" aria-hidden="true">
+          <div class="hero-mockup">
+            <div class="mockup-topbar">
+              <span class="mockup-dot"></span>
+              <span class="mockup-dot"></span>
+              <span class="mockup-dot"></span>
+              <span class="mockup-title">tech-roadmap.pdf</span>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-badge">📊 STRATEGY ROADMAP READY</div>
+              <div class="mockup-label">Prioritized Investments</div>
+              <div class="mockup-bar-row">
+                <div class="mockup-bar-item"><span>Cloud</span><div class="mockup-bar-track"><div class="mockup-bar-fill" style="width:92%"></div></div></div>
+                <div class="mockup-bar-item"><span>AI</span><div class="mockup-bar-track"><div class="mockup-bar-fill" style="width:85%"></div></div></div>
+                <div class="mockup-bar-item"><span>Security</span><div class="mockup-bar-track"><div class="mockup-bar-fill" style="width:70%"></div></div></div>
+                <div class="mockup-bar-item"><span>Process</span><div class="mockup-bar-track"><div class="mockup-bar-fill" style="width:60%"></div></div></div>
+              </div>
+              <div class="mockup-divider"></div>
+              <div class="mockup-stat-row">
+                <div class="mockup-stat-box"><span class="msb-num">Free</span><span class="msb-lbl">1st call</span></div>
+                <div class="mockup-stat-box"><span class="msb-num">30d</span><span class="msb-lbl">Roadmap</span></div>
+                <div class="mockup-stat-box"><span class="msb-num">4.9★</span><span class="msb-lbl">Rating</span></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -208,7 +248,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
       <br><br>
-      <a href="../index.html#services" class="back-link">← Back to all services</a>
+      <a href="../index.html#services" class="back-link">&#8592; Back to all services</a>
     </div>
   </section>
 
