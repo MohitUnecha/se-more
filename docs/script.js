@@ -3,10 +3,18 @@
    Gulf Blue + British Racing Green Edition
    ============================================ */
 
-// API base URL — Vercel serverless backend
-const SEMORE_API_BASE = 'https://se-more.vercel.app';
+// Use the local backend in development and the deployed backend elsewhere.
+const SEMORE_API_BASE = ['localhost', '127.0.0.1'].includes(window.location.hostname)
+  ? window.location.origin
+  : 'https://se-more.vercel.app';
 
 document.addEventListener('DOMContentLoaded', () => {
+  const escapeHtml = (text) => text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 
   // ── Page Loader + Eye Zoom Intro ─────────
   const loader = document.getElementById('pageLoader');
@@ -491,9 +499,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Smooth Scroll for Anchor Links ────────
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
-      e.preventDefault();
-      const target = document.querySelector(anchor.getAttribute('href'));
+      const href = anchor.getAttribute('href');
+      if (!href || href === '#') {
+        return;
+      }
+
+      const target = document.querySelector(href);
       if (target) {
+        e.preventDefault();
         const offset = 80;
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
@@ -505,32 +518,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const contactForm = document.getElementById('contactForm');
   const formSuccess = document.getElementById('formSuccess');
 
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+  if (contactForm && formSuccess) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const company = document.getElementById('company').value;
-    const message = document.getElementById('message').value;
+      const name = contactForm.querySelector('#name')?.value || '';
+      const email = contactForm.querySelector('#email')?.value || '';
+      const company = contactForm.querySelector('#company')?.value || '';
+      const message = contactForm.querySelector('#message')?.value || '';
 
-    const subject = encodeURIComponent(`New Inquiry from ${name} — ${company || 'N/A'}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nCompany: ${company || 'N/A'}\n\nMessage:\n${message}`
-    );
+      const subject = encodeURIComponent(`New Inquiry from ${name} — ${company || 'N/A'}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\nCompany: ${company || 'N/A'}\n\nMessage:\n${message}`
+      );
 
-    window.open(`mailto:contact@semore.com?subject=${subject}&body=${body}`, '_self');
+      window.open(`mailto:contact@semore.com?subject=${subject}&body=${body}`, '_self');
 
-    const btn = contactForm.querySelector('button[type="submit"]');
-    btn.innerHTML = '<span>Opening email...</span>';
-    btn.disabled = true;
+      const btn = contactForm.querySelector('button[type="submit"]');
+      if (!btn) {
+        return;
+      }
 
-    setTimeout(() => {
-      contactForm.querySelectorAll('.form-group').forEach(g => g.style.display = 'none');
-      btn.style.display = 'none';
-      formSuccess.classList.add('visible');
-      contactForm.reset();
-    }, 1500);
-  });
+      btn.innerHTML = '<span>Opening email...</span>';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        contactForm.querySelectorAll('.form-group').forEach(g => g.style.display = 'none');
+        btn.style.display = 'none';
+        formSuccess.classList.add('visible');
+        contactForm.reset();
+      }, 1500);
+    });
+  }
 
   // ── Parallax Floating Shapes ──────────────
   function animateShapes() {
@@ -687,6 +706,8 @@ INSTRUCTIONS FOR RESPONDING:
   const chatMessages = document.getElementById('chatMessages');
   const chatFormEl = document.getElementById('chatForm');
   const chatInput = document.getElementById('chatInput');
+  const chatSubmit = chatFormEl?.querySelector('button[type="submit"]');
+  let isSendingChat = false;
 
   let chatHistory = [
     { role: 'system', content: SYSTEM_PROMPT },
@@ -695,8 +716,16 @@ INSTRUCTIONS FOR RESPONDING:
 
   chatToggle.addEventListener('click', () => {
     chatWidget.classList.toggle('open');
+    chatToggle.setAttribute('aria-expanded', String(chatWidget.classList.contains('open')));
     if (chatWidget.classList.contains('open')) {
       chatInput.focus();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && chatWidget.classList.contains('open')) {
+      chatWidget.classList.remove('open');
+      chatToggle.setAttribute('aria-expanded', 'false');
     }
   });
 
@@ -717,7 +746,7 @@ INSTRUCTIONS FOR RESPONDING:
   }
 
   function formatBotText(text) {
-    let html = text
+    let html = escapeHtml(text)
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\n/g, '<br>');
     html = html.replace(
@@ -748,9 +777,28 @@ INSTRUCTIONS FOR RESPONDING:
     if (indicator) indicator.remove();
   }
 
+  function setChatPendingState(isPending) {
+    isSendingChat = isPending;
+    chatWidget.classList.toggle('busy', isPending);
+    if (chatInput) {
+      chatInput.disabled = isPending;
+    }
+    if (chatSubmit) {
+      chatSubmit.disabled = isPending;
+    }
+    document.querySelectorAll('.quick-reply').forEach(btn => {
+      btn.disabled = isPending;
+    });
+  }
+
   async function sendToGroq(userMessage) {
+    if (isSendingChat) {
+      return;
+    }
+
     chatHistory.push({ role: 'user', content: userMessage });
 
+    setChatPendingState(true);
     addTypingIndicator();
 
     try {
@@ -770,13 +818,19 @@ INSTRUCTIONS FOR RESPONDING:
       if (!response.ok) throw new Error(`API error: ${response.status}`);
 
       const data = await response.json();
-      const reply = data.choices[0].message.content;
+      const reply = data.choices?.[0]?.message?.content;
+      if (!reply) {
+        throw new Error('Malformed chat response');
+      }
 
       chatHistory.push({ role: 'assistant', content: reply });
       addMessage(reply, 'bot');
     } catch (err) {
       removeTypingIndicator();
       addMessage("Sorry, I'm having trouble connecting right now. Please email us at contact@semore.com!", 'bot');
+    } finally {
+      setChatPendingState(false);
+      chatInput?.focus();
     }
   }
 

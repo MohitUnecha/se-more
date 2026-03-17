@@ -1,4 +1,10 @@
 {
+  "name": "semore-site",
+  "private": true,
+  "scripts": {
+    "start": "node dev-server.js",
+    "dev": "node dev-server.js"
+  },
   "dependencies": {
     "express": "^5.2.1"
   }
