@@ -520,7 +520,7 @@
             Leave us a Google Review
           </a>
         </div>
-        <form class="contact-form simple-contact-form" id="contactForm">
+        <form class="contact-form simple-contact-form" id="contactForm" data-recaptcha-site-key="6LcGM5QsAAAAAPthKCHhm9x3yeFwWyBqV7ksUop6">
           <input type="text" id="website" name="website" class="form-trap" tabindex="-1" autocomplete="off" aria-hidden="true">
           <input type="hidden" id="formStartedAt" name="formStartedAt" value="">
           <div class="contact-form-head">
@@ -544,9 +544,7 @@
             <label for="message">How can we help?</label>
             <textarea id="message" name="message" rows="5" placeholder="Tell us about your project, problem, or question..." required></textarea>
           </div>
-          <div class="form-group form-group-captcha">
-            <div class="g-recaptcha" data-sitekey="6LcGM5QsAAAAAPthKCHhm9x3yeFwWyBqV7ksUop6" data-theme="dark"></div>
-          </div>
+          <p class="form-protection-note">Protected by reCAPTCHA and rate limiting.</p>
           <button type="submit" class="btn btn-primary btn-lg btn-full">
             <span>Send Message</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -662,7 +660,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
   </button>
 
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LcGM5QsAAAAAPthKCHhm9x3yeFwWyBqV7ksUop6" async defer></script>
   <script src="script.js"></script>
 </body>
 </html>

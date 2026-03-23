@@ -1686,14 +1686,10 @@ h1, h2, h3, h4, h5 {
   min-height: 100px;
 }
 
-.form-group-captcha {
-  display: flex;
-  justify-content: flex-start;
-  overflow-x: auto;
-}
-
-.form-group-captcha .g-recaptcha {
-  transform-origin: left top;
+.form-protection-note {
+  margin: 2px 0 16px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
 .form-success {
@@ -1734,12 +1730,6 @@ h1, h2, h3, h4, h5 {
 
 .form-status.error {
   color: #d64545;
-}
-
-@media (max-width: 520px) {
-  .form-group-captcha .g-recaptcha {
-    transform: scale(0.92);
-  }
 }
 
 .booking-funnel-head {

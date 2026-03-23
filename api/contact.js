@@ -2,6 +2,10 @@ const nodemailer = require('nodemailer');
 
 const allowedOrigins = ['https://semore.tech', 'https://www.semore.tech', 'https://se-more.github.io'];
 const minimumFormFillMs = 2500;
+const rateLimitWindowMs = 60 * 60 * 1000;
+const maxRequestsPerWindow = 5;
+const minimumRecaptchaScore = 0.5;
+const rateLimitStore = new Map();
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -16,6 +20,29 @@ function applyCors(req, res) {
 
 function sanitizeLine(value = '') {
   return String(value).replace(/[\r\n]+/g, ' ').trim();
+}
+
+function extractClientIp(forwardedFor) {
+  return typeof forwardedFor === 'string' ? forwardedFor.split(',')[0].trim() : '';
+}
+
+function assertRateLimit(ipAddress) {
+  if (!ipAddress) {
+    return;
+  }
+
+  const now = Date.now();
+  const existing = rateLimitStore.get(ipAddress) || [];
+  const recent = existing.filter((timestamp) => now - timestamp < rateLimitWindowMs);
+
+  if (recent.length >= maxRequestsPerWindow) {
+    const error = new Error('Too many messages from this network. Please try again later.');
+    error.status = 429;
+    throw error;
+  }
+
+  recent.push(now);
+  rateLimitStore.set(ipAddress, recent);
 }
 
 function createTransporter() {
@@ -78,6 +105,18 @@ async function verifyRecaptchaToken(token, remoteIp) {
     error.details = data['error-codes'] || null;
     throw error;
   }
+
+  if (data.action && data.action !== 'contact_form') {
+    const error = new Error('reCAPTCHA verification failed. Please try again.');
+    error.status = 400;
+    throw error;
+  }
+
+  if (typeof data.score === 'number' && data.score < minimumRecaptchaScore) {
+    const error = new Error('Spam protection flagged this request. Please try again later.');
+    error.status = 400;
+    throw error;
+  }
 }
 
 async function handler(req, res) {
@@ -101,9 +140,7 @@ async function handler(req, res) {
   const website = String(req.body?.website || '').trim();
   const formStartedAt = Number(req.body?.formStartedAt || 0);
   const recaptchaToken = String(req.body?.recaptchaToken || '').trim();
-  const forwardedFor = req.headers['x-forwarded-for'];
-  const remoteIp =
-    typeof forwardedFor === 'string' ? forwardedFor.split(',')[0].trim() : undefined;
+  const remoteIp = extractClientIp(req.headers['x-forwarded-for']);
 
   if (website) {
     return res.status(400).json({ error: 'Spam check failed.' });
@@ -134,6 +171,7 @@ async function handler(req, res) {
   ].join('\n');
 
   try {
+    assertRateLimit(remoteIp);
     await verifyRecaptchaToken(recaptchaToken, remoteIp);
     const transporter = createTransporter();
     const result = await transporter.sendMail({

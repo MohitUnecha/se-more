@@ -26,6 +26,25 @@ document.addEventListener('DOMContentLoaded', () => {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
 
+  const getRecaptchaToken = async (siteKey) => {
+    if (!siteKey) {
+      throw new Error('reCAPTCHA site key is missing.');
+    }
+
+    if (typeof window.grecaptcha === 'undefined') {
+      throw new Error('Spam protection is still loading. Please wait a second and try again.');
+    }
+
+    return new Promise((resolve, reject) => {
+      window.grecaptcha.ready(() => {
+        window.grecaptcha
+          .execute(siteKey, { action: 'contact_form' })
+          .then(resolve)
+          .catch(() => reject(new Error('Spam protection could not be verified. Please try again.')));
+      });
+    });
+  };
+
   // ── Page Loader + Eye Zoom Intro ─────────
   const loader = document.getElementById('pageLoader');
   const eyeOverlay = document.getElementById('eyeZoomOverlay');
@@ -659,6 +678,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const formStatus = document.getElementById('formStatus');
 
   if (contactForm && formSuccess) {
+    const recaptchaSiteKey = contactForm.dataset.recaptchaSiteKey || '';
     const formStartedAtField = contactForm.querySelector('#formStartedAt');
     if (formStartedAtField) {
       formStartedAtField.value = String(Date.now());
@@ -673,8 +693,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const message = contactForm.querySelector('#message')?.value || '';
       const website = contactForm.querySelector('#website')?.value || '';
       const formStartedAt = contactForm.querySelector('#formStartedAt')?.value || '';
-      const recaptchaToken =
-        typeof window.grecaptcha !== 'undefined' ? window.grecaptcha.getResponse() : '';
 
       const btn = contactForm.querySelector('button[type="submit"]');
       if (!btn) {
@@ -689,18 +707,11 @@ document.addEventListener('DOMContentLoaded', () => {
         formStatus.style.display = '';
       }
 
-      if (!recaptchaToken) {
-        if (formStatus) {
-          formStatus.textContent = 'Please complete reCAPTCHA before sending your message.';
-          formStatus.classList.add('error');
-        }
-        return;
-      }
-
       btn.innerHTML = '<span>Sending...</span>';
       btn.disabled = true;
 
       try {
+        const recaptchaToken = await getRecaptchaToken(recaptchaSiteKey);
         const response = await fetch(`${SEMORE_API_BASE}/api/contact`, {
           method: 'POST',
           headers: {
@@ -733,16 +744,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (formStartedAtField) {
           formStartedAtField.value = String(Date.now());
         }
-        if (typeof window.grecaptcha !== 'undefined') {
-          window.grecaptcha.reset();
-        }
       } catch (error) {
         if (formStatus) {
           formStatus.textContent = error.message || 'Failed to send message.';
           formStatus.classList.add('error');
-        }
-        if (typeof window.grecaptcha !== 'undefined') {
-          window.grecaptcha.reset();
         }
         if (formStartedAtField) {
           formStartedAtField.value = String(Date.now());
