@@ -3,19 +3,22 @@
    Gulf Blue + British Racing Green Edition
    ============================================ */
 
-// Use a configured backend when available, the local server in development,
-// and a local knowledge fallback everywhere else.
+// Use a configured backend when available, the current origin for Vercel
+// deployments, or fall back to empty (triggers FormSubmit on GitHub Pages).
 const SEMORE_API_BASE = (() => {
   const configuredBase = window.SEMORE_CONFIG?.apiBase || window.SEMORE_CONFIG?.API_BASE || '';
   if (configuredBase) {
     return configuredBase.replace(/\/$/, '');
   }
 
-  if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
-    return window.location.origin;
+  // GitHub Pages has no API — let the contact form fall back to FormSubmit.co
+  if (window.location.hostname === 'se-more.github.io') {
+    return '';
   }
 
-  return '';
+  // On Vercel (semore.tech) and local dev, use the current origin so
+  // /api/contact resolves to the same host.
+  return window.location.origin;
 })();
 
 const SEMORE_FALLBACK_EMAIL = 'contact@semore.tech';
