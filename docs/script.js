@@ -289,6 +289,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── Cursor-Tracking Eyes ──────────────────
+  const eyeMotionState = new WeakMap();
+
+  const smoothEyeTarget = (el, x, y, easing = 0.16) => {
+    const state = eyeMotionState.get(el) || { x: 0, y: 0 };
+    state.x += (x - state.x) * easing;
+    state.y += (y - state.y) * easing;
+    eyeMotionState.set(el, state);
+    return state;
+  };
+
   function trackEyes() {
     const pupils = document.querySelectorAll('.logo-colon .eye .pupil');
     pupils.forEach(pupil => {
@@ -307,8 +317,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const px = Math.cos(angle) * travel;
       const py = Math.sin(angle) * travel;
+      const smooth = smoothEyeTarget(pupil, px, py, 0.18);
 
-      pupil.style.transform = `translate(calc(-50% + ${px}px), calc(-50% + ${py}px))`;
+      pupil.style.transform = `translate3d(calc(-50% + ${smooth.x}px), calc(-50% + ${smooth.y}px), 0)`;
     });
 
     const irises = document.querySelectorAll('.scanner-eye .iris');
@@ -328,8 +339,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const px = Math.cos(angle) * travel;
       const py = Math.sin(angle) * travel;
+      const smooth = smoothEyeTarget(iris, px, py, 0.12);
 
-      iris.style.transform = `translate(${px}px, ${py}px)`;
+      iris.style.transform = `translate3d(${smooth.x}px, ${smooth.y}px, 0)`;
     });
 
     requestAnimationFrame(trackEyes);
@@ -697,8 +709,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (bookingPathGrid) {
     bookingPathGrid.querySelectorAll('.booking-path').forEach(button => {
       button.addEventListener('click', () => {
-        bookingPathGrid.querySelectorAll('.booking-path').forEach(path => path.classList.remove('active'));
+        bookingPathGrid.querySelectorAll('.booking-path').forEach(path => {
+          path.classList.remove('active');
+          path.setAttribute('aria-pressed', 'false');
+        });
         button.classList.add('active');
+        button.setAttribute('aria-pressed', 'true');
         applyBookingRoute(button.dataset.path);
       });
     });

@@ -527,25 +527,53 @@
             <p>We route the conversation differently depending on whether you need automation, AI, modernization, or strategic guidance.</p>
           </div>
           <div class="booking-path-grid" id="bookingPathGrid">
-            <button class="booking-path active" type="button" data-path="automation">
-              <span class="booking-path-kicker">Automation</span>
+            <button class="booking-path active" type="button" data-path="automation" aria-pressed="true">
+              <span class="booking-path-topline">
+                <span class="booking-path-kicker">Automation</span>
+                <span class="booking-path-icon" aria-hidden="true">01</span>
+              </span>
               <strong>Eliminate repetitive work</strong>
               <small>For manual workflows, reporting, and handoff friction.</small>
+              <span class="booking-path-footer">
+                <span class="booking-path-chip">Ops Lift</span>
+                <span class="booking-path-arrow" aria-hidden="true">↗</span>
+              </span>
             </button>
-            <button class="booking-path" type="button" data-path="ai">
-              <span class="booking-path-kicker">AI Integration</span>
+            <button class="booking-path" type="button" data-path="ai" aria-pressed="false">
+              <span class="booking-path-topline">
+                <span class="booking-path-kicker">AI Integration</span>
+                <span class="booking-path-icon" aria-hidden="true">02</span>
+              </span>
               <strong>Add intelligence to existing systems</strong>
               <small>For support load, document workflows, and internal search.</small>
+              <span class="booking-path-footer">
+                <span class="booking-path-chip">AI Layer</span>
+                <span class="booking-path-arrow" aria-hidden="true">↗</span>
+              </span>
             </button>
-            <button class="booking-path" type="button" data-path="modernization">
-              <span class="booking-path-kicker">Modernization</span>
+            <button class="booking-path" type="button" data-path="modernization" aria-pressed="false">
+              <span class="booking-path-topline">
+                <span class="booking-path-kicker">Modernization</span>
+                <span class="booking-path-icon" aria-hidden="true">03</span>
+              </span>
               <strong>Upgrade without ripping out</strong>
               <small>For legacy tools, spreadsheets, and brittle systems.</small>
+              <span class="booking-path-footer">
+                <span class="booking-path-chip">System Reset</span>
+                <span class="booking-path-arrow" aria-hidden="true">↗</span>
+              </span>
             </button>
-            <button class="booking-path" type="button" data-path="strategy">
-              <span class="booking-path-kicker">Strategy</span>
+            <button class="booking-path" type="button" data-path="strategy" aria-pressed="false">
+              <span class="booking-path-topline">
+                <span class="booking-path-kicker">Strategy</span>
+                <span class="booking-path-icon" aria-hidden="true">04</span>
+              </span>
               <strong>Get a roadmap before spending</strong>
               <small>For audits, architecture, vendor choices, and sequencing.</small>
+              <span class="booking-path-footer">
+                <span class="booking-path-chip">Clarity First</span>
+                <span class="booking-path-arrow" aria-hidden="true">↗</span>
+              </span>
             </button>
           </div>
           <div class="booking-route-summary" id="bookingRouteSummary">
