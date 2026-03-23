@@ -782,7 +782,7 @@ document.addEventListener('DOMContentLoaded', () => {
             await sendToApi(SEMORE_CONTACT_ENDPOINT, apiPayload);
           } catch (apiError) {
             const shouldFallback = !SEMORE_CONFIGURED_CONTACT_ENDPOINT
-              && (apiError instanceof TypeError || apiError.status === 404 || apiError.status === 405);
+              && (apiError instanceof TypeError || [404, 405, 500, 502, 503, 504].includes(Number(apiError.status || 0)));
             if (!shouldFallback) {
               throw apiError;
             }
