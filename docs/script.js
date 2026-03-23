@@ -29,35 +29,39 @@ document.addEventListener('DOMContentLoaded', () => {
     .replace(/'/g, '&#39;');
 
   const getRecaptchaToken = async (siteKey) => {
-    if (!siteKey) {
-      if (SEMORE_IS_LOCALHOST) {
-        return '';
-      }
-
-      throw new Error('reCAPTCHA site key is missing.');
+    if (!siteKey || SEMORE_IS_LOCALHOST) {
+      return '';
     }
 
-    if (typeof window.grecaptcha === 'undefined') {
-      if (SEMORE_IS_LOCALHOST) {
-        return '';
+    // Wait up to 5 seconds for reCAPTCHA to load, then fall back gracefully
+    const loaded = await new Promise((resolve) => {
+      if (typeof window.grecaptcha !== 'undefined') {
+        resolve(true);
+        return;
       }
+      let elapsed = 0;
+      const interval = setInterval(() => {
+        elapsed += 100;
+        if (typeof window.grecaptcha !== 'undefined') {
+          clearInterval(interval);
+          resolve(true);
+        } else if (elapsed >= 5000) {
+          clearInterval(interval);
+          resolve(false);
+        }
+      }, 100);
+    });
 
-      throw new Error('Spam protection is still loading. Please wait a second and try again.');
+    if (!loaded) {
+      return '';
     }
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       window.grecaptcha.ready(() => {
         window.grecaptcha
           .execute(siteKey, { action: 'contact_form' })
           .then(resolve)
-          .catch(() => {
-            if (SEMORE_IS_LOCALHOST) {
-              resolve('');
-              return;
-            }
-
-            reject(new Error('Spam protection could not be verified. Please try again.'));
-          });
+          .catch(() => resolve(''));
       });
     });
   };

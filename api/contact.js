@@ -4,7 +4,7 @@ const allowedOrigins = ['https://semore.tech', 'https://www.semore.tech', 'https
 const minimumFormFillMs = 2500;
 const rateLimitWindowMs = 10 * 60 * 1000;
 const maxRequestsPerWindow = 5;
-const minimumRecaptchaScore = 0.5;
+const minimumRecaptchaScore = 0.3;
 const rateLimitStore = new Map();
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -163,27 +163,13 @@ function createTransporter({ localMode = false } = {}) {
   }
 }
 
-async function verifyRecaptchaToken(token, remoteIp, { optional = false } = {}) {
+async function verifyRecaptchaToken(token, remoteIp) {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
 
-  if (!secretKey) {
-    if (optional) {
-      return { skipped: true, reason: 'missing-secret' };
-    }
-
-    const error = new Error('reCAPTCHA is not configured. Set RECAPTCHA_SECRET_KEY in Vercel.');
-    error.status = 500;
-    throw error;
-  }
-
-  if (!token) {
-    if (optional) {
-      return { skipped: true, reason: 'missing-token' };
-    }
-
-    const error = new Error('Please complete reCAPTCHA before sending your message.');
-    error.status = 400;
-    throw error;
+  // Skip reCAPTCHA gracefully if not configured or no token — other spam
+  // protections (honeypot, timing check, rate limiting) still apply.
+  if (!secretKey || !token) {
+    return { skipped: true, reason: !secretKey ? 'missing-secret' : 'missing-token' };
   }
 
   const payload = new URLSearchParams({
@@ -282,7 +268,7 @@ async function handler(req, res) {
 
   try {
     assertRateLimit(remoteIp);
-    await verifyRecaptchaToken(recaptchaToken, remoteIp, { optional: localMode });
+    await verifyRecaptchaToken(recaptchaToken, remoteIp);
     const { transporter, senderEmail } = createTransporter({ localMode });
     const result = await transporter.sendMail({
       from: `"SE:MORE Contact" <${senderEmail}>`,
