@@ -1621,6 +1621,15 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 24px 52px rgba(8, 19, 27, 0.08);
 }
 
+.form-trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .contact-form-head {
   margin-bottom: 24px;
 }

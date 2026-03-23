@@ -659,6 +659,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const formStatus = document.getElementById('formStatus');
 
   if (contactForm && formSuccess) {
+    const formStartedAtField = contactForm.querySelector('#formStartedAt');
+    if (formStartedAtField) {
+      formStartedAtField.value = String(Date.now());
+    }
+
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -666,6 +671,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = contactForm.querySelector('#email')?.value || '';
       const company = contactForm.querySelector('#company')?.value || '';
       const message = contactForm.querySelector('#message')?.value || '';
+      const website = contactForm.querySelector('#website')?.value || '';
+      const formStartedAt = contactForm.querySelector('#formStartedAt')?.value || '';
       const recaptchaToken =
         typeof window.grecaptcha !== 'undefined' ? window.grecaptcha.getResponse() : '';
 
@@ -699,7 +706,15 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ name, email, company, message, recaptchaToken })
+          body: JSON.stringify({
+            name,
+            email,
+            company,
+            message,
+            website,
+            formStartedAt,
+            recaptchaToken
+          })
         });
 
         const payload = await response.json().catch(() => ({}));
@@ -715,6 +730,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         formSuccess.classList.add('visible');
         contactForm.reset();
+        if (formStartedAtField) {
+          formStartedAtField.value = String(Date.now());
+        }
         if (typeof window.grecaptcha !== 'undefined') {
           window.grecaptcha.reset();
         }
@@ -725,6 +743,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (typeof window.grecaptcha !== 'undefined') {
           window.grecaptcha.reset();
+        }
+        if (formStartedAtField) {
+          formStartedAtField.value = String(Date.now());
         }
         btn.innerHTML = defaultButtonHtml;
       } finally {

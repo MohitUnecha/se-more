@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 
 const allowedOrigins = ['https://semore.tech', 'https://www.semore.tech', 'https://se-more.github.io'];
+const minimumFormFillMs = 2500;
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -97,10 +98,16 @@ async function handler(req, res) {
   const email = sanitizeLine(req.body?.email);
   const company = sanitizeLine(req.body?.company);
   const message = String(req.body?.message || '').trim();
+  const website = String(req.body?.website || '').trim();
+  const formStartedAt = Number(req.body?.formStartedAt || 0);
   const recaptchaToken = String(req.body?.recaptchaToken || '').trim();
   const forwardedFor = req.headers['x-forwarded-for'];
   const remoteIp =
     typeof forwardedFor === 'string' ? forwardedFor.split(',')[0].trim() : undefined;
+
+  if (website) {
+    return res.status(400).json({ error: 'Spam check failed.' });
+  }
 
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Name, email, and message are required.' });
@@ -108,6 +115,10 @@ async function handler(req, res) {
 
   if (!emailPattern.test(email)) {
     return res.status(400).json({ error: 'Please enter a valid email address.' });
+  }
+
+  if (!Number.isFinite(formStartedAt) || formStartedAt <= 0 || Date.now() - formStartedAt < minimumFormFillMs) {
+    return res.status(400).json({ error: 'Please wait a moment and try again.' });
   }
 
   const subject = sanitizeLine(`New SE:MORE contact form submission from ${name}`);
