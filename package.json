@@ -6,6 +6,7 @@
     "dev": "node dev-server.js"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "nodemailer": "^8.0.3"
   }
 }

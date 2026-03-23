@@ -1,3 +1,5 @@
+const nodemailer = require('nodemailer');
+
 const allowedOrigins = ['https://semore.tech', 'https://www.semore.tech', 'https://se-more.github.io'];
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -15,67 +17,25 @@ function sanitizeLine(value = '') {
   return String(value).replace(/[\r\n]+/g, ' ').trim();
 }
 
-function encodeMimeMessage(message) {
-  return Buffer.from(message)
-    .toString('base64')
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/g, '');
-}
+function createTransporter() {
+  const emailUser = process.env.EMAIL_USER;
+  const emailPass = process.env.EMAIL_PASS;
 
-function formatGmailError(status, errorText) {
-  if (status === 401) {
-    return 'Email service authentication failed. Check the Google OAuth credentials in Vercel.';
+  if (!emailUser || !emailPass) {
+    const error = new Error(
+      'Email credentials are not configured. Set EMAIL_USER and EMAIL_PASS in Vercel.'
+    );
+    error.status = 500;
+    throw error;
   }
 
-  if (status === 403) {
-    return 'Email service permission denied. The Gmail token likely does not have Gmail send access.';
-  }
-
-  return errorText || 'Gmail API request failed.';
-}
-
-async function getGmailAccessToken() {
-  const refreshToken = process.env.GOOGLE_REFRESH_TOKEN;
-  const clientId = process.env.GOOGLE_CLIENT_ID;
-  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
-
-  if (refreshToken && clientId && clientSecret) {
-    const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: new URLSearchParams({
-        client_id: clientId,
-        client_secret: clientSecret,
-        refresh_token: refreshToken,
-        grant_type: 'refresh_token'
-      })
-    });
-
-    const tokenPayload = await tokenResponse.json().catch(() => ({}));
-    if (!tokenResponse.ok || !tokenPayload.access_token) {
-      const details =
-        tokenPayload.error_description || tokenPayload.error || 'Failed to refresh Gmail access token.';
-      const error = new Error(details);
-      error.status = tokenResponse.status || 500;
-      throw error;
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: emailUser,
+      pass: emailPass
     }
-
-    return tokenPayload.access_token;
-  }
-
-  const directAccessToken = process.env.GMAIL_ACCESS_TOKEN || process.env.GMAIL_API_KEY;
-  if (directAccessToken) {
-    return directAccessToken;
-  }
-
-  const error = new Error(
-    'Google email credentials are not configured. Set GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_REFRESH_TOKEN in Vercel.'
-  );
-  error.status = 500;
-  throw error;
+  });
 }
 
 async function handler(req, res) {
@@ -90,6 +50,7 @@ async function handler(req, res) {
   }
 
   const destinationEmail = process.env.CONTACT_TO_EMAIL || 'contact@semore.tech';
+  const emailUser = process.env.EMAIL_USER;
 
   const name = sanitizeLine(req.body?.name);
   const email = sanitizeLine(req.body?.email);
@@ -116,40 +77,26 @@ async function handler(req, res) {
     message
   ].join('\n');
 
-  const rawMessage = [
-    `To: ${destinationEmail}`,
-    `Subject: ${subject}`,
-    `Reply-To: ${email}`,
-    'Content-Type: text/plain; charset="UTF-8"',
-    'MIME-Version: 1.0',
-    '',
-    plainText
-  ].join('\r\n');
-
   try {
-    const gmailAccessToken = await getGmailAccessToken();
-    const response = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${gmailAccessToken}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ raw: encodeMimeMessage(rawMessage) })
+    const transporter = createTransporter();
+    const result = await transporter.sendMail({
+      from: `"SE:MORE Contact" <${emailUser}>`,
+      to: destinationEmail,
+      replyTo: email,
+      subject,
+      text: plainText
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      return res.status(response.status).json({
-        error: formatGmailError(response.status, errorText),
-        details: errorText || null
-      });
-    }
-
-    const data = await response.json();
-    return res.status(200).json({ ok: true, id: data.id });
+    return res.status(200).json({ ok: true, id: result.messageId });
   } catch (error) {
     console.error('Contact form send error:', error);
-    return res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
+    const authError =
+      error.code === 'EAUTH' || error.responseCode === 535 || error.responseCode === 534;
+    return res.status(error.status || 500).json({
+      error: authError
+        ? 'Email authentication failed. Check EMAIL_USER, EMAIL_PASS, and the Gmail account app password settings.'
+        : error.message || 'Internal Server Error'
+    });
   }
 }
 
