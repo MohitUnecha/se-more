@@ -604,7 +604,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `Consultation Type: ${selectedRoute.title}\nName: ${name}\nEmail: ${email}\nCompany: ${company || 'N/A'}\nDesired Timeline: ${timeline}\n\nWhy we are reaching out:\n${selectedRoute.intro}\n\nCurrent bottleneck:\n${message}\n\nNext step requested:\nPlease route us to the best SE:MORE consultation path for this need.`
       );
 
-      window.open(`mailto:contact@semore.com?subject=${subject}&body=${body}`, '_self');
+      window.open(`mailto:contact@semore.tech?subject=${subject}&body=${body}`, '_self');
 
       const btn = contactForm.querySelector('button[type="submit"]');
       if (!btn) {
@@ -701,7 +701,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       keywords: ['contact', 'email', 'book', 'consultation', 'get started'],
-      reply: 'The fastest way to get started is to book a consultation or email contact@semore.com. If you tell me your biggest bottleneck, I can also suggest which SE:MORE service to lead with in that conversation.'
+      reply: 'The fastest way to get started is to book a consultation or email contact@semore.tech. If you tell me your biggest bottleneck, I can also suggest which SE:MORE service to lead with in that conversation.'
     },
     {
       keywords: ['location', 'where', 'new jersey'],
@@ -713,7 +713,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 COMPANY OVERVIEW:
 SE:MORE LLC is a technology-enablement company headquartered in Central New Jersey, USA. The company operates remotely and serves businesses across the United States and worldwide. SE:MORE helps businesses see more ways to grow, profit, and operate smarter through targeted technology solutions. The company name "SE:MORE" uses the colon as two eyes, symbolizing vision, clarity, and the ability to see opportunities others miss.
-- Email: contact@semore.com
+- Email: contact@semore.tech
 - Headquarters: Central New Jersey, USA
 - Google Maps: https://www.google.com/maps/place/SE:MORE/@40.5857762,-74.376456,15z
 - Website: Current page
@@ -811,7 +811,7 @@ INSTRUCTIONS FOR RESPONDING:
 - Keep responses to 2-3 sentences unless the user asks for detailed information
 - If asked about pricing, explain that SE:MORE offers custom quotes based on scope and always start with a free consultation
 - If asked about founders, share their LinkedIn URLs and expertise
-- If someone wants to get started, direct them to book a free consultation or email contact@semore.com
+- If someone wants to get started, direct them to book a free consultation or email contact@semore.tech
 - For detailed service questions, reference specific use cases and tools from the service descriptions above
 - If the question is unrelated to SE:MORE or business technology, politely redirect`;
 
@@ -871,7 +871,7 @@ INSTRUCTIONS FOR RESPONDING:
     );
     html = html.replace(
       /contact@semore\.com/g,
-      '<a href="mailto:contact@semore.com" style="color:var(--gulf-blue);text-decoration:underline;">contact@semore.com</a>'
+      '<a href="mailto:contact@semore.tech" style="color:var(--gulf-blue);text-decoration:underline;">contact@semore.tech</a>'
     );
     return html;
   }
